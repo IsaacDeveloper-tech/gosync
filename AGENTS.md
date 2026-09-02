@@ -16,6 +16,8 @@ A command-line application for synchronizing one directory with another in real 
 
 - Methods and functions must be testable, and assertive programming must be used (checking for potential errors first).
 
+- Also follow Golang conventions for tests, methods, functions, and variables.
+
 ## Rules
 
 - Read `docs/constitution.md` and the active spec in `specs/` before touching the code.
