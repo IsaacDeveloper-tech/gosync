@@ -17,3 +17,6 @@ Each task is estimated below 30 minutes and maps to functional requirements with
 
 Added the `gosync watch <directory-a> <directory-b>` command contract to the active specification.
 The plan and tasks now cover argument validation, immediate synchronization, and fixed five-second rechecks.
+
+Completed task 1 by defining synchronization entry, comparison, action, and result domain types.
+Added tests that verify the contracts represent file, directory, copy, deletion, success, and failure outcomes.

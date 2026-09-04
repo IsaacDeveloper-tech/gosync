@@ -1,6 +1,6 @@
 # Implementation Tasks
 
-- [ ] **1. Define synchronization domain types** (20 min)
+- [x] **1. Define synchronization domain types** (20 min)
   RF: RF-01, RF-02, RF-05, RF-06
   Done when: Entry, comparison, action, and result types express every required synchronization outcome.
 
