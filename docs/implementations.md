@@ -11,3 +11,9 @@ It now defines confirmed state, recovery, retry handling, path validation, and a
 
 Added the active specification's implementation plan in English, including module responsibilities and data models.
 The plan maps each module and test scenario to the local synchronization functional requirements.
+
+Added the active specification's ordered implementation task list in English.
+Each task is estimated below 30 minutes and maps to functional requirements with a verifiable completion condition.
+
+Added the `gosync watch <directory-a> <directory-b>` command contract to the active specification.
+The plan and tasks now cover argument validation, immediate synchronization, and fixed five-second rechecks.

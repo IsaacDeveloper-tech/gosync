@@ -2,13 +2,14 @@
 
 ## Scope
 
-Implement local bidirectional directory synchronization only. The implementation shall satisfy RF-01 through RF-15 and exclude remote transports, compression, GUIs, web services, special-entry replication, and version restoration.
+Implement local bidirectional directory synchronization through `gosync watch <directory-a> <directory-b>`. The implementation shall satisfy RF-01 through RF-17 and exclude remote transports, compression, GUIs, web services, special-entry replication, version restoration, and configurable polling intervals.
 
 ## Modules
 
 | Module | Responsibility | RF Coverage |
 | --- | --- | --- |
-| CLI and interaction | Read selected roots, show errors and notifications, and request conflict decisions. | RF-04, RF-08, RF-09, RF-13, RF-14 |
+| CLI and interaction | Parse the `watch` command and its two roots, show usage, errors, and notifications, and request conflict decisions. | RF-04, RF-08, RF-09, RF-13, RF-14, RF-16 |
+| Watch loop | Run one synchronization immediately, then initiate a new check every five seconds while the command runs. | RF-17 |
 | Root validation | Normalize roots, create missing roots, and reject equal or nested roots. | RF-10, RF-11 |
 | Preflight scanner | Traverse both roots and reject symbolic links and special entries before mutations. | RF-12 |
 | State store | Load and save the last confirmed synchronization record only after full success. | RF-01, RF-02, RF-03 |
@@ -104,20 +105,30 @@ Justification: this satisfies RF-13 and RF-14 while keeping the confirmed record
 
 Discarded alternative: treat a locked file as a normal fatal error. The user would need to restart synchronization manually.
 
+### Fixed Periodic Rechecks
+
+The `watch` command runs synchronization immediately and then rechecks both roots every five seconds. The interval is fixed for this specification.
+
+Justification: periodic checks use the Go standard library and provide predictable local synchronization without external dependencies.
+
+Discarded alternative: operating-system file notifications. They normally require an external dependency and are unnecessary for the current fixed-interval scope.
+
 ## Execution Sequence
 
-1. Read and normalize the selected root paths.
-2. Reject identical or nested roots.
-3. Scan existing roots for unsupported entries.
-4. Create a missing root only after preflight succeeds.
-5. Load the confirmed record.
-6. If recovery is required, compare roots and request authoritative-root selection when they differ.
-7. Compare both roots and construct a complete synchronization plan.
-8. Request decisions for tied file conflicts and file-directory conflicts.
-9. Execute approved additions, updates, and deletions.
-10. Retry locked files until they succeed; stop for other filesystem errors.
-11. Verify synchronized contents.
-12. Save the new confirmed record only after complete success.
+1. Parse `gosync watch <directory-a> <directory-b>` and show usage unless exactly two roots are supplied.
+2. Read and normalize the selected root paths.
+3. Reject identical or nested roots.
+4. Scan existing roots for unsupported entries.
+5. Create a missing root only after preflight succeeds.
+6. Load the confirmed record.
+7. If recovery is required, compare roots and request authoritative-root selection when they differ.
+8. Compare both roots and construct a complete synchronization plan.
+9. Request decisions for tied file conflicts and file-directory conflicts.
+10. Execute approved additions, updates, and deletions.
+11. Retry locked files until they succeed; stop for other filesystem errors.
+12. Verify synchronized contents.
+13. Save the new confirmed record only after complete success.
+14. Wait five seconds and repeat from root validation while the command remains running.
 
 ## Test Strategy
 
@@ -140,6 +151,7 @@ Discarded alternative: treat a locked file as a normal fatal error. The user wou
 - Read, write, deletion, and permission failures preserve confirmed state. RF-13.
 - Locked-file retry notifications and eventual completion. RF-14.
 - A successful run leaves equal structures, names, and contents, then persists state. RF-01, RF-15.
+- The `watch` command validates argument count, synchronizes at startup, and rechecks at five-second intervals. RF-16, RF-17.
 
 ### Verification
 

@@ -4,6 +4,14 @@
 
 Keep two local directories equivalent so that each contains the same structure, names, and file contents.
 
+## Command Interface
+
+```text
+gosync watch <directory-a> <directory-b>
+```
+
+`directory-a` and `directory-b` are the two local roots synchronized bidirectionally by the `watch` command.
+
 ## Functional Requirements
 
 RF-01. When synchronization completes successfully, the system shall retain a confirmed record of the synchronized items. This is required to distinguish later additions from deletions.
@@ -36,6 +44,10 @@ RF-14. When a file is locked by another program, the system shall notify the use
 
 RF-15. When determining whether selected directories are synchronized, the system shall compare their structure, names, and file contents, and shall not require matching permissions or modification times. This is required to define synchronization independently of non-content metadata.
 
+RF-16. When the user invokes `gosync watch`, the system shall require exactly two directory arguments and display usage information when the argument count is invalid. This is required to identify both synchronization roots unambiguously.
+
+RF-17. When `gosync watch <directory-a> <directory-b>` receives valid arguments, the system shall synchronize the directories immediately and recheck them every five seconds while the command remains running. This is required to synchronize local changes without manual restarts.
+
 ## Out of Scope
 
 - FTP, SFTP, cloud, or other remote synchronization.
@@ -43,6 +55,7 @@ RF-15. When determining whether selected directories are synchronized, the syste
 - Graphical user interfaces and web services.
 - Replicating symbolic links or special files.
 - Version history and restoration of prior file versions.
+- Configuring the five-second `watch` recheck interval.
 
 ## Completion Criteria
 
@@ -53,3 +66,4 @@ RF-15. When determining whether selected directories are synchronized, the syste
 - Tied file conflicts and file-directory conflicts require a user decision.
 - Missing root directories are created, overlapping roots are rejected, and unsupported entries cause no changes.
 - Filesystem errors preserve the confirmed record; locked files are retried and reported when synchronized.
+- The `watch` command accepts exactly two directory arguments, synchronizes immediately, and rechecks both directories every five seconds.
