@@ -8,3 +8,6 @@ The specification defines conflict, deletion, missing-directory, and unsupported
 
 Revised the local synchronization specification to resolve ambiguity in deletions, conflicts, and filesystem failures.
 It now defines confirmed state, recovery, retry handling, path validation, and automated test completion criteria.
+
+Added the active specification's implementation plan in English, including module responsibilities and data models.
+The plan maps each module and test scenario to the local synchronization functional requirements.
