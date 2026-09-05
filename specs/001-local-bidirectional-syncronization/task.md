@@ -4,7 +4,7 @@
   RF: RF-01, RF-02, RF-05, RF-06
   Done when: Entry, comparison, action, and result types express every required synchronization outcome.
 
-- [ ] **2. Validate selected root paths** (20 min)
+- [x] **2. Validate selected root paths** (20 min)
   RF: RF-11
   Done when: Identical and nested roots are rejected with explanatory errors.
 

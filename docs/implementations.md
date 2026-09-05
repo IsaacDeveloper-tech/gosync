@@ -20,3 +20,6 @@ The plan and tasks now cover argument validation, immediate synchronization, and
 
 Completed task 1 by defining synchronization entry, comparison, action, and result domain types.
 Added tests that verify the contracts represent file, directory, copy, deletion, success, and failure outcomes.
+
+Completed task 2 by adding root path normalization and validation for equal or nested synchronization roots.
+Added tests for normalized paths, identical roots, nested roots, sibling roots, and empty root arguments.
