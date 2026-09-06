@@ -16,7 +16,7 @@
   RF: RF-10
   Done when: A missing selected root is created only after successful preflight validation.
 
-- [ ] **5. Implement confirmed-state storage** (25 min)
+- [x] **5. Implement confirmed-state storage** (25 min)
   RF: RF-01, RF-02
   Done when: State loads by root pair and is written only after an explicitly successful run.
 

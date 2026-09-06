@@ -29,3 +29,6 @@ Added tests for regular entries, missing roots, symbolic links, and unsupported 
 
 Completed task 4 by creating missing synchronization roots while preserving existing directory contents.
 Added tests for one or two missing roots and errors when a selected root is an existing file.
+
+Completed task 5 by adding persistent confirmed-state storage keyed by the selected root pair.
+Added tests for state loading, root-pair isolation, missing state, and preservation after incomplete synchronization.
