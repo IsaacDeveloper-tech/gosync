@@ -23,3 +23,6 @@ Added tests that verify the contracts represent file, directory, copy, deletion,
 
 Completed task 2 by adding root path normalization and validation for equal or nested synchronization roots.
 Added tests for normalized paths, identical roots, nested roots, sibling roots, and empty root arguments.
+
+Completed task 3 by adding a read-only preflight scan for both synchronization roots.
+Added tests for regular entries, missing roots, symbolic links, and unsupported filesystem entry modes.

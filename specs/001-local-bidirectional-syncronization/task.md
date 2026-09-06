@@ -8,7 +8,7 @@
   RF: RF-11
   Done when: Identical and nested roots are rejected with explanatory errors.
 
-- [ ] **3. Scan roots before modifications** (25 min)
+- [x] **3. Scan roots before modifications** (25 min)
   RF: RF-12
   Done when: Symbolic links and special entries are detected before any content change.
 
