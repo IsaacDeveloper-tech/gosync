@@ -1,5 +1,7 @@
 package main
 
+import "time"
+
 type EntryKind uint8
 
 const (
@@ -8,8 +10,10 @@ const (
 )
 
 type SynchronizationEntry struct {
-	RelativePath string
-	Kind         EntryKind
+	RelativePath     string
+	Kind             EntryKind
+	ContentDigest    string
+	ModificationTime time.Time
 }
 
 type EntryComparison struct {

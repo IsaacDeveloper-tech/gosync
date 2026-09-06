@@ -32,3 +32,6 @@ Added tests for one or two missing roots and errors when a selected root is an e
 
 Completed task 5 by adding persistent confirmed-state storage keyed by the selected root pair.
 Added tests for state loading, root-pair isolation, missing state, and preservation after incomplete synchronization.
+
+Completed task 6 by adding recursive directory inventories with file content digests and modification times.
+Added tests for inventory entries and comparisons that ignore metadata while detecting content and structure differences.

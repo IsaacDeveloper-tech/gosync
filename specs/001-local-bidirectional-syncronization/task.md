@@ -20,7 +20,7 @@
   RF: RF-01, RF-02
   Done when: State loads by root pair and is written only after an explicitly successful run.
 
-- [ ] **6. Build directory inventories and content comparison** (25 min)
+- [x] **6. Build directory inventories and content comparison** (25 min)
   RF: RF-03, RF-07, RF-15
   Done when: Inventories detect path, type, content, and modification-time differences while ignoring permissions.
 
