@@ -12,7 +12,7 @@
   RF: RF-12
   Done when: Symbolic links and special entries are detected before any content change.
 
-- [ ] **4. Create missing root directories** (15 min)
+- [x] **4. Create missing root directories** (15 min)
   RF: RF-10
   Done when: A missing selected root is created only after successful preflight validation.
 

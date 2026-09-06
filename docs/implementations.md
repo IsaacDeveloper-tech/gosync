@@ -26,3 +26,6 @@ Added tests for normalized paths, identical roots, nested roots, sibling roots, 
 
 Completed task 3 by adding a read-only preflight scan for both synchronization roots.
 Added tests for regular entries, missing roots, symbolic links, and unsupported filesystem entry modes.
+
+Completed task 4 by creating missing synchronization roots while preserving existing directory contents.
+Added tests for one or two missing roots and errors when a selected root is an existing file.
