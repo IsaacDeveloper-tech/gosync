@@ -32,7 +32,7 @@
   RF: RF-03, RF-04
   Done when: Absent state triggers comparison and requests an authoritative root only when directories differ.
 
-- [ ] **9. Implement file-content conflict selection** (20 min)
+- [x] **9. Implement file-content conflict selection** (20 min)
   RF: RF-07, RF-08
   Done when: Newer content wins automatically and equal modification times require user selection.
 

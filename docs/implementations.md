@@ -41,3 +41,6 @@ Added tests for both directions, unchanged entries, absent entries, and determin
 
 Completed task 8 by comparing both inventories when confirmed state is unavailable.
 Added tests for matching directories, authoritative-side selection, existing state, and decision errors.
+
+Completed task 9 by resolving differing file contents using modification time or an explicit user choice on ties.
+Added tests for both newer-file directions, equal-time conflicts, matching content, and decision errors.
