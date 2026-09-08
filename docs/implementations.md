@@ -38,3 +38,6 @@ Added tests for inventory entries and comparisons that ignore metadata while det
 
 Completed task 7 by classifying one-sided entries as additions or deletions using confirmed state.
 Added tests for both directions, unchanged entries, absent entries, and deterministic action order.
+
+Completed task 8 by comparing both inventories when confirmed state is unavailable.
+Added tests for matching directories, authoritative-side selection, existing state, and decision errors.

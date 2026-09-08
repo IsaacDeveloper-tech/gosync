@@ -28,7 +28,7 @@
   RF: RF-05, RF-06
   Done when: An item existing on one side is correctly classified as either an addition or deletion.
 
-- [ ] **8. Implement missing-state recovery flow** (20 min)
+- [x] **8. Implement missing-state recovery flow** (20 min)
   RF: RF-03, RF-04
   Done when: Absent state triggers comparison and requests an authoritative root only when directories differ.
 
