@@ -50,3 +50,6 @@ Added tests for both conflict directions, sorted listings, missing choices, and 
 
 Completed task 11 by generating complete synchronization plans from additions, deletions, and conflicts.
 Added tests confirming ordered actions, required user decisions, directory contents, and rejection of partial plans.
+
+Completed tasks 12-15: action execution, locked-file retries, final verification/state commit, and `watch` argument parsing.
+Added tests for filesystem changes, retry notifications, confirmed-state integrity, and command usage validation.

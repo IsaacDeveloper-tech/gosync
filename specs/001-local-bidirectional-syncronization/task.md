@@ -44,19 +44,19 @@
   RF: RF-05, RF-06, RF-07, RF-08, RF-09
   Done when: All required copies, deletions, and user decisions are known before execution starts.
 
-- [ ] **12. Execute approved file and directory actions** (25 min)
+- [x] **12. Execute approved file and directory actions** (25 min)
   RF: RF-05, RF-06, RF-07, RF-13
   Done when: Approved additions, updates, and deletions are applied, while non-lock errors stop execution.
 
-- [ ] **13. Add locked-file retry and notifications** (25 min)
+- [x] **13. Add locked-file retry and notifications** (25 min)
   RF: RF-14
   Done when: Locked files notify the user, retry automatically, and notify again after synchronization succeeds.
 
-- [ ] **14. Verify final contents and commit confirmed state** (20 min)
+- [x] **14. Verify final contents and commit confirmed state** (20 min)
   RF: RF-01, RF-02, RF-15
   Done when: State is saved only after both roots have equal structure, names, and contents.
 
-- [ ] **15. Parse the watch command and its roots** (20 min)
+- [x] **15. Parse the watch command and its roots** (20 min)
   RF: RF-16
   Done when: `gosync watch <directory-a> <directory-b>` accepts exactly two roots and invalid argument counts show usage information.
 
