@@ -68,18 +68,18 @@
   RF: RF-04, RF-08, RF-09, RF-10, RF-11, RF-13, RF-14, RF-16, RF-17
   Done when: The CLI runs command parsing, validation, preflight, planning, decisions, execution, notifications, state handling, and periodic rechecks in order.
 
-- [ ] **18. Add unit tests for state and classification** (25 min)
+- [x] **18. Add unit tests for state and classification** (25 min)
   RF: RF-01, RF-02, RF-03, RF-05, RF-06
   Done when: Tests cover confirmed-state persistence, interruption preservation, additions, and deletions.
 
-- [ ] **19. Add unit tests for validation, conflicts, and watch behavior** (25 min)
+- [x] **19. Add unit tests for validation, conflicts, and watch behavior** (25 min)
   RF: RF-07, RF-08, RF-09, RF-11, RF-12, RF-15, RF-16, RF-17
   Done when: Tests cover root overlap, unsupported entries, content equality, timestamp ties, type conflicts, command arguments, immediate synchronization, and five-second rechecks.
 
-- [ ] **20. Add filesystem integration tests** (25 min)
+- [x] **20. Add filesystem integration tests** (25 min)
   RF: RF-05 through RF-17
   Done when: Temporary-directory tests verify successful synchronization, recovery, failures, locked-file completion, and watch polling.
 
-- [ ] **21. Run the complete test suite** (10 min)
+- [x] **21. Run the complete test suite** (10 min)
   RF: All
   Done when: `go test` passes with coverage for every functional requirement and defined error behavior.

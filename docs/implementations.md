@@ -56,3 +56,9 @@ Added tests for filesystem changes, retry notifications, confirmed-state integri
 
 Completed tasks 16-17 by adding the immediate five-second watch loop and connecting the full CLI synchronization flow.
 Added tests for periodic execution, command integration, preflight, planning, execution, verification, and state commit.
+
+Completed tasks 18-21 with unit and filesystem integration coverage for state, classification, validation, conflicts, and watch behavior.
+The complete Go test suite was executed with coverage after adding the final test scenarios.
+
+Reorganized production code under `src/` and moved all tests under `test/` using an external test package.
+Kept a minimal root entrypoint so the existing `go run .` command remains available.
