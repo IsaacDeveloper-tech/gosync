@@ -60,11 +60,11 @@
   RF: RF-16
   Done when: `gosync watch <directory-a> <directory-b>` accepts exactly two roots and invalid argument counts show usage information.
 
-- [ ] **16. Add the five-second watch loop** (20 min)
+- [x] **16. Add the five-second watch loop** (20 min)
   RF: RF-17
   Done when: The command synchronizes immediately and initiates another check every five seconds while running.
 
-- [ ] **17. Connect the CLI orchestration flow** (25 min)
+- [x] **17. Connect the CLI orchestration flow** (25 min)
   RF: RF-04, RF-08, RF-09, RF-10, RF-11, RF-13, RF-14, RF-16, RF-17
   Done when: The CLI runs command parsing, validation, preflight, planning, decisions, execution, notifications, state handling, and periodic rechecks in order.
 

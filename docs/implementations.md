@@ -53,3 +53,6 @@ Added tests confirming ordered actions, required user decisions, directory conte
 
 Completed tasks 12-15: action execution, locked-file retries, final verification/state commit, and `watch` argument parsing.
 Added tests for filesystem changes, retry notifications, confirmed-state integrity, and command usage validation.
+
+Completed tasks 16-17 by adding the immediate five-second watch loop and connecting the full CLI synchronization flow.
+Added tests for periodic execution, command integration, preflight, planning, execution, verification, and state commit.
