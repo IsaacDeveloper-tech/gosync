@@ -36,7 +36,7 @@
   RF: RF-07, RF-08
   Done when: Newer content wins automatically and equal modification times require user selection.
 
-- [ ] **10. Implement file-directory conflict selection** (20 min)
+- [x] **10. Implement file-directory conflict selection** (20 min)
   RF: RF-09
   Done when: The directory contents are listed and no replacement occurs without user choice.
 

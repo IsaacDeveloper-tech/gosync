@@ -44,3 +44,6 @@ Added tests for matching directories, authoritative-side selection, existing sta
 
 Completed task 9 by resolving differing file contents using modification time or an explicit user choice on ties.
 Added tests for both newer-file directions, equal-time conflicts, matching content, and decision errors.
+
+Completed task 10 by listing directory contents and requiring an explicit side selection for file-directory conflicts.
+Added tests for both conflict directions, sorted listings, missing choices, and decision errors.
