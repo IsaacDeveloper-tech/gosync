@@ -62,3 +62,15 @@ The complete Go test suite was executed with coverage after adding the final tes
 
 Reorganized production code under `src/` and moved all tests under `test/` using an external test package.
 Kept a minimal root entrypoint so the existing `go run .` command remains available.
+
+Added the log system specification from the agreed scope, error handling, retention, and privacy decisions.
+It defines EARS requirements, exclusions, and completion criteria without prescribing implementation details.
+
+Resolved the high-severity log specification findings through agreed destination fallback and failure behavior.
+Clarified log placement, synchronization-root overlap, storage-limit failures, and protected data in errors and paths.
+
+Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
+Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
+
+Added the dependency-ordered log system task list with work items estimated below 30 minutes.
+Each task identifies its RF coverage and includes an independently verifiable completion condition.
