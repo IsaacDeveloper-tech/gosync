@@ -24,7 +24,7 @@
   RF: RF-03, RF-07, RF-15
   Done when: Inventories detect path, type, content, and modification-time differences while ignoring permissions.
 
-- [ ] **7. Classify additions and deletions from confirmed state** (25 min)
+- [x] **7. Classify additions and deletions from confirmed state** (25 min)
   RF: RF-05, RF-06
   Done when: An item existing on one side is correctly classified as either an addition or deletion.
 

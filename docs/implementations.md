@@ -35,3 +35,6 @@ Added tests for state loading, root-pair isolation, missing state, and preservat
 
 Completed task 6 by adding recursive directory inventories with file content digests and modification times.
 Added tests for inventory entries and comparisons that ignore metadata while detecting content and structure differences.
+
+Completed task 7 by classifying one-sided entries as additions or deletions using confirmed state.
+Added tests for both directions, unchanged entries, absent entries, and deterministic action order.
