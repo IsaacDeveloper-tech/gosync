@@ -47,3 +47,6 @@ Added tests for both newer-file directions, equal-time conflicts, matching conte
 
 Completed task 10 by listing directory contents and requiring an explicit side selection for file-directory conflicts.
 Added tests for both conflict directions, sorted listings, missing choices, and decision errors.
+
+Completed task 11 by generating complete synchronization plans from additions, deletions, and conflicts.
+Added tests confirming ordered actions, required user decisions, directory contents, and rejection of partial plans.

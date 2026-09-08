@@ -40,7 +40,7 @@
   RF: RF-09
   Done when: The directory contents are listed and no replacement occurs without user choice.
 
-- [ ] **11. Generate a complete synchronization action plan** (25 min)
+- [x] **11. Generate a complete synchronization action plan** (25 min)
   RF: RF-05, RF-06, RF-07, RF-08, RF-09
   Done when: All required copies, deletions, and user decisions are known before execution starts.
 
