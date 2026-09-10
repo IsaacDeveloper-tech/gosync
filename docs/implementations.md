@@ -74,3 +74,15 @@ Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and
 
 Added the dependency-ordered log system task list with work items estimated below 30 minutes.
 Each task identifies its RF coverage and includes an independently verifiable completion condition.
+
+Added the global JSON configuration specification based on the agreed interactive workflow and failure behavior.
+It defines interval validation, bidirectional and source-to-destination modes, unavailable BACKUP handling, persistence, and reload scope.
+
+Resolved all reviewed configuration-specification findings through agreed behavioral contracts and precedence rules.
+Clarified strict JSON validation, atomic replacement, mode safety, scheduling, concurrent configuration, CLI validation, storage protection, and logging.
+
+Added the configuration system implementation plan with modules, data models, execution sequences, and justified decisions.
+Mapped RF-01 through RF-32 to planned responsibilities and unit, filesystem, CLI, synchronization, and isolation tests.
+
+Added the dependency-ordered configuration system task list with work items estimated below 30 minutes.
+Each task identifies its RF coverage and a verifiable completion condition spanning configuration, scheduling, and synchronization behavior.
