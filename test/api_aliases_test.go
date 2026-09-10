@@ -22,6 +22,8 @@ type SynchronizationPlan = gosync.SynchronizationPlan
 type SynchronizationExecutionOptions = gosync.SynchronizationExecutionOptions
 type WatchLoopOptions = gosync.WatchLoopOptions
 type WatchCommandOptions = gosync.WatchCommandOptions
+type LogSeverity = gosync.LogSeverity
+type LogEvent = gosync.LogEvent
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -33,6 +35,20 @@ const (
 	SynchronizationSideFirst              = gosync.SynchronizationSideFirst
 	SynchronizationSideSecond             = gosync.SynchronizationSideSecond
 	watchUsage                            = gosync.WatchUsage
+	LogSeverityDebug                      = gosync.LogSeverityDebug
+	LogSeverityInfo                       = gosync.LogSeverityInfo
+	LogSeverityWarn                       = gosync.LogSeverityWarn
+	LogSeverityError                      = gosync.LogSeverityError
+	LogEventSynchronizationStarted        = gosync.LogEventSynchronizationStarted
+	LogEventSynchronizationCompleted      = gosync.LogEventSynchronizationCompleted
+	LogEventChangeSynchronized            = gosync.LogEventChangeSynchronized
+	LogEventConflictDetected              = gosync.LogEventConflictDetected
+	LogEventRetryStarted                  = gosync.LogEventRetryStarted
+	LogEventRetryCompleted                = gosync.LogEventRetryCompleted
+	LogEventWarningRaised                 = gosync.LogEventWarningRaised
+	LogEventOperationFailed               = gosync.LogEventOperationFailed
+	LogEventPersistentDestinationFailure  = gosync.LogEventPersistentDestinationFailure
+	LogEventConsoleDestinationFailure     = gosync.LogEventConsoleDestinationFailure
 )
 
 var errSynchronizationIncomplete = gosync.ErrSynchronizationIncomplete

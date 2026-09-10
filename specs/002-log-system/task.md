@@ -1,6 +1,6 @@
 # Log System Implementation Tasks
 
-- [ ] **1. Define log severity and event domain types** (15 min)
+- [x] **1. Define log severity and event domain types** (15 min)
   RF: RF-01, RF-02, RF-04, RF-05
   Done when: Tests verify all four severity values and every planned stable event identifier can be represented.
 

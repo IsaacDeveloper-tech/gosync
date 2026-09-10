@@ -69,6 +69,9 @@ It defines EARS requirements, exclusions, and completion criteria without prescr
 Resolved the high-severity log specification findings through agreed destination fallback and failure behavior.
 Clarified log placement, synchronization-root overlap, storage-limit failures, and protected data in errors and paths.
 
+Completed log system task 1 by defining the required severity levels and stable event identifiers.
+Added focused domain tests for all four severities and every event in the log event catalog.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 
