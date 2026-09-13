@@ -84,6 +84,9 @@ Added tests for secret redaction, file-content exclusion, complete writes, and p
 Completed log system tasks 7-11 with per-user location resolution, root-overlap detection, append, rotation, and retention.
 Added filesystem tests for working-directory independence, 10 MB boundaries, preserved records, and four newest archives.
 
+Completed log system tasks 12-27 with destination coordination, fallback behavior, synchronization instrumentation, and end-to-end privacy coverage.
+Added unit and filesystem integration tests for destination failures, lifecycle events, changes, conflicts, retries, rotation, retention, and protected data.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 

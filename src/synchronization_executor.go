@@ -12,6 +12,7 @@ type SynchronizationExecutionOptions struct {
 	Notify        func(string)
 	IsLockedError func(error) bool
 	Sleep         func()
+	Logger        *LoggingCoordinator
 }
 
 func executeSynchronizationPlan(roots RootPaths, plan SynchronizationPlan, options SynchronizationExecutionOptions) SynchronizationResult {
@@ -21,6 +22,11 @@ func executeSynchronizationPlan(roots RootPaths, plan SynchronizationPlan, optio
 		}, options)
 		if err != nil {
 			return SynchronizationResult{Failure: fmt.Errorf("execute action for %q: %w", action.RelativePath, err)}
+		}
+		if options.Logger != nil {
+			if err := logSynchronizedAction(options.Logger, action); err != nil {
+				return SynchronizationResult{Failure: fmt.Errorf("log synchronized action for %q: %w", action.RelativePath, err)}
+			}
 		}
 	}
 
@@ -135,6 +141,11 @@ func retryLockedFile(filePath string, operation func() error, options Synchroniz
 		if err == nil {
 			if lockedNotificationSent {
 				notify(fmt.Sprintf("File %q synchronized successfully.", filePath))
+				if options.Logger != nil {
+					if err := logRetryEvent(options.Logger, LogEventRetryCompleted, LogSeverityInfo, filePath, "locked file retry completed"); err != nil {
+						return err
+					}
+				}
 			}
 			return nil
 		}
@@ -144,6 +155,14 @@ func retryLockedFile(filePath string, operation func() error, options Synchroniz
 		if !lockedNotificationSent {
 			notify(fmt.Sprintf("File %q is locked; retrying synchronization.", filePath))
 			lockedNotificationSent = true
+			if options.Logger != nil {
+				if err := logRetryEvent(options.Logger, LogEventRetryStarted, LogSeverityWarn, filePath, "locked file retry started"); err != nil {
+					return err
+				}
+				if err := logRetryEvent(options.Logger, LogEventWarningRaised, LogSeverityWarn, filePath, "file is locked; retrying synchronization"); err != nil {
+					return err
+				}
+			}
 		}
 		sleep()
 	}

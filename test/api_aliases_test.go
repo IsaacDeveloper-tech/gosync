@@ -28,6 +28,8 @@ type LogEntry = gosync.LogEntry
 type LogSanitizer = gosync.LogSanitizer
 type ConsoleDestination = gosync.ConsoleDestination
 type RotatingFileDestination = gosync.RotatingFileDestination
+type LoggingCoordinator = gosync.LoggingCoordinator
+type LoggingCoordinatorOptions = gosync.LoggingCoordinatorOptions
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -56,6 +58,7 @@ const (
 )
 
 var errSynchronizationIncomplete = gosync.ErrSynchronizationIncomplete
+var errLoggingUnavailable = gosync.ErrLoggingUnavailable
 
 var newConfirmedStateStore = gosync.NewConfirmedStateStore
 var newConfirmedStateStoreAt = gosync.NewConfirmedStateStoreAt
@@ -88,3 +91,6 @@ var newConsoleDestination = gosync.NewConsoleDestination
 var resolveLogDirectory = gosync.ResolveLogDirectory
 var logLocationOverlapsRoots = gosync.LogLocationOverlapsRoots
 var newRotatingFileDestination = gosync.NewRotatingFileDestination
+var newLoggingCoordinator = gosync.NewLoggingCoordinator
+var initializeLoggingCoordinator = gosync.InitializeLoggingCoordinator
+var synchronizeDirectoriesWithLogger = gosync.SynchronizeDirectoriesWithLogger

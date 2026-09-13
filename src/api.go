@@ -156,3 +156,21 @@ func LogLocationOverlapsRoots(logLocation string, roots RootPaths) (bool, error)
 func NewRotatingFileDestination(directory string) RotatingFileDestination {
 	return newRotatingFileDestination(directory)
 }
+
+func NewLoggingCoordinator(options LoggingCoordinatorOptions) (*LoggingCoordinator, error) {
+	return newLoggingCoordinator(options)
+}
+
+func InitializeLoggingCoordinator(roots RootPaths, options LoggingCoordinatorOptions) (*LoggingCoordinator, error) {
+	return initializeLoggingCoordinator(roots, options)
+}
+
+func SynchronizeDirectoriesWithLogger(
+	roots RootPaths,
+	store ConfirmedStateStore,
+	input io.Reader,
+	output io.Writer,
+	logger *LoggingCoordinator,
+) error {
+	return synchronizeDirectoriesWithLogger(roots, store, input, output, logger)
+}

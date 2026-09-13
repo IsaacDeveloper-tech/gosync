@@ -44,66 +44,66 @@
   RF: RF-09
   Done when: Repeated-rotation tests retain the active file and four newest archives and remove the oldest generation.
 
-- [ ] **12. Surface every persistent logging failure** (20 min)
+- [x] **12. Surface every persistent logging failure** (20 min)
   RF: RF-07, RF-08, RF-09
   Done when: Tests return creation, opening, append, rotation, and retention failures to the caller that coordinates destinations.
 
-- [ ] **13. Coordinate healthy console and file destinations** (25 min)
+- [x] **13. Coordinate healthy console and file destinations** (25 min)
   RF: RF-03, RF-05
   Done when: Tests verify the same sanitized and formatted record is written synchronously to both available destinations.
 
-- [ ] **14. Fall back to console after persistent failure** (20 min)
+- [x] **14. Fall back to console after persistent failure** (20 min)
   RF: RF-07
   Done when: Tests verify one persistent failure is reported through the console and prevents all further file writes during that execution.
 
-- [ ] **15. Fall back to file after console failure** (20 min)
+- [x] **15. Fall back to file after console failure** (20 min)
   RF: RF-13
   Done when: Tests verify a console write failure is recorded in the file and later records continue using the file destination.
 
-- [ ] **16. Stop logging when both destinations fail** (20 min)
+- [x] **16. Stop logging when both destinations fail** (20 min)
   RF: RF-14
   Done when: Tests verify simultaneous and sequential destination loss returns a logging error that stops the producing operation.
 
-- [ ] **17. Initialize logging with root-overlap fallback** (25 min)
+- [x] **17. Initialize logging with root-overlap fallback** (25 min)
   RF: RF-03, RF-07, RF-12, RF-14
   Done when: Tests verify normal initialization enables both destinations, overlap enables console only with a warning, and total initialization failure returns an error.
 
-- [ ] **18. Log synchronization lifecycle events** (25 min)
+- [x] **18. Log synchronization lifecycle events** (25 min)
   RF: RF-01, RF-04
   Done when: Tests verify every synchronization attempt records its start and its successful or failed outcome with the planned severity.
 
-- [ ] **19. Log synchronized change events** (20 min)
+- [x] **19. Log synchronized change events** (20 min)
   RF: RF-02, RF-04, RF-11
   Done when: Tests verify completed copy and deletion actions produce change events with sanitized affected-path context.
 
-- [ ] **20. Log conflict events** (20 min)
+- [x] **20. Log conflict events** (20 min)
   RF: RF-02, RF-04, RF-11
   Done when: Tests verify file-content and file-directory conflicts produce conflict events without changing existing user decisions.
 
-- [ ] **21. Log retry and warning events** (20 min)
+- [x] **21. Log retry and warning events** (20 min)
   RF: RF-02, RF-04
   Done when: Tests verify locked-file retry start, eventual completion, and warning conditions emit their corresponding events.
 
-- [ ] **22. Log sanitized operation failures** (25 min)
+- [x] **22. Log sanitized operation failures** (25 min)
   RF: RF-02, RF-06, RF-10, RF-11
   Done when: Tests verify operation failures retain sanitized diagnostic context while the original user-facing error behavior remains unchanged.
 
-- [ ] **23. Add dual-destination filesystem integration coverage** (25 min)
+- [x] **23. Add dual-destination filesystem integration coverage** (25 min)
   RF: RF-03, RF-05
   Done when: A temporary application-data test confirms one synchronization event produces equivalent structured records in captured console output and the active log file.
 
-- [ ] **24. Add rotation and retention filesystem integration coverage** (25 min)
+- [x] **24. Add rotation and retention filesystem integration coverage** (25 min)
   RF: RF-07, RF-08, RF-09
   Done when: Temporary-file tests cross the size boundary repeatedly, preserve triggering records, retain five files, and switch to console after a forced rotation failure.
 
-- [ ] **25. Add destination fallback integration coverage** (25 min)
+- [x] **25. Add destination fallback integration coverage** (25 min)
   RF: RF-07, RF-12, RF-13, RF-14
   Done when: Integration tests verify root overlap, file-only fallback, console-only fallback, and termination after both destinations become unavailable.
 
-- [ ] **26. Add protected-data end-to-end coverage** (25 min)
+- [x] **26. Add protected-data end-to-end coverage** (25 min)
   RF: RF-06, RF-10, RF-11
   Done when: End-to-end tests confirm protected values and file contents are absent from every console and file record while safe context remains visible.
 
-- [ ] **27. Run the complete project test suite** (10 min)
+- [x] **27. Run the complete project test suite** (10 min)
   RF: RF-01 through RF-14
   Done when: `go test ./...` passes with automated coverage for every log-system requirement and defined error behavior.

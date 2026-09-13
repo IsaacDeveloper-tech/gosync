@@ -17,6 +17,8 @@ type WatchCommandOptions struct {
 	Stop        <-chan struct{}
 	StateStore  *ConfirmedStateStore
 	Synchronize func(RootPaths) error
+	Logger      *LoggingCoordinator
+	Logging     LoggingCoordinatorOptions
 }
 
 func runWatchCommand(arguments []string, options WatchCommandOptions) error {
@@ -47,13 +49,91 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		}
 		store = &defaultStore
 	}
+	logger := options.Logger
+	if logger == nil {
+		loggingOptions := options.Logging
+		if loggingOptions.ConsoleWriter == nil {
+			loggingOptions.ConsoleWriter = output
+		}
+		logger, err = initializeLoggingCoordinator(roots, loggingOptions)
+		if err != nil {
+			return err
+		}
+	}
 
 	return runWatchLoop(func() error {
-		return synchronizeDirectories(roots, *store, input, output)
+		return synchronizeDirectoriesWithLogger(roots, *store, input, output, logger)
 	}, WatchLoopOptions{Interval: options.Interval, Stop: options.Stop})
 }
 
 func synchronizeDirectories(roots RootPaths, store confirmedStateStore, input io.Reader, output io.Writer) error {
+	return synchronizeDirectoriesWithLogger(roots, store, input, output, nil)
+}
+
+func synchronizeDirectoriesWithLogger(
+	roots RootPaths,
+	store confirmedStateStore,
+	input io.Reader,
+	output io.Writer,
+	logger *LoggingCoordinator,
+) error {
+	if logger != nil {
+		if err := logger.Log(LogEntry{
+			Severity: LogSeverityInfo,
+			Event:    LogEventSynchronizationStarted,
+			Message:  "synchronization started",
+			Context: map[string]string{
+				"first_root":  roots.First,
+				"second_root": roots.Second,
+			},
+		}); err != nil {
+			return err
+		}
+	}
+
+	synchronizationError := performSynchronization(roots, store, input, output, logger)
+	if synchronizationError != nil {
+		if logger == nil {
+			return synchronizationError
+		}
+		if err := logger.Log(LogEntry{
+			Severity: LogSeverityError,
+			Event:    LogEventOperationFailed,
+			Message:  "synchronization operation failed",
+			Context:  map[string]string{"error": synchronizationError.Error()},
+		}); err != nil {
+			return err
+		}
+		if err := logger.Log(LogEntry{
+			Severity: LogSeverityError,
+			Event:    LogEventSynchronizationCompleted,
+			Message:  "synchronization completed with failure",
+			Context:  map[string]string{"error": synchronizationError.Error()},
+		}); err != nil {
+			return err
+		}
+		return synchronizationError
+	}
+
+	if logger != nil {
+		if err := logger.Log(LogEntry{
+			Severity: LogSeverityInfo,
+			Event:    LogEventSynchronizationCompleted,
+			Message:  "synchronization completed successfully",
+		}); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func performSynchronization(
+	roots RootPaths,
+	store confirmedStateStore,
+	input io.Reader,
+	output io.Writer,
+	logger *LoggingCoordinator,
+) error {
 	if err := scanRootsForUnsupportedEntries(roots); err != nil {
 		return err
 	}
@@ -76,6 +156,11 @@ func synchronizeDirectories(roots RootPaths, store confirmedStateStore, input io
 
 	comparisons := compareDirectoryInventories(firstInventory, secondInventory)
 	attachConfirmedEntries(comparisons, confirmedState, confirmedStateFound)
+	if logger != nil {
+		if err := logSynchronizationConflicts(logger, comparisons); err != nil {
+			return err
+		}
+	}
 
 	var plan SynchronizationPlan
 	if !confirmedStateFound {
@@ -91,6 +176,15 @@ func synchronizeDirectories(roots RootPaths, store confirmedStateStore, input io
 			return err
 		}
 		if recovery.RequiresAuthoritativeSide {
+			if logger != nil {
+				if err := logger.Log(LogEntry{
+					Severity: LogSeverityWarn,
+					Event:    LogEventWarningRaised,
+					Message:  "confirmed synchronization state is unavailable; selected side will prevail",
+				}); err != nil {
+					return err
+				}
+			}
 			plan = generateAuthoritativeSynchronizationPlan(comparisons, recovery.AuthoritativeSide)
 		} else {
 			plan, err = generateSynchronizationPlan(comparisons, nil, nil, nil)
@@ -118,6 +212,7 @@ func synchronizeDirectories(roots RootPaths, store confirmedStateStore, input io
 		Notify: func(message string) {
 			fmt.Fprintln(output, message)
 		},
+		Logger: logger,
 	})
 	if !result.Completed {
 		return result.Failure
