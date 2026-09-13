@@ -4,7 +4,7 @@
   RF: RF-01, RF-02, RF-04, RF-05
   Done when: Tests verify all four severity values and every planned stable event identifier can be represented.
 
-- [ ] **2. Build timestamped structured log entries** (20 min)
+- [x] **2. Build timestamped structured log entries** (20 min)
   RF: RF-01, RF-02, RF-04, RF-05
   Done when: Tests using a fixed clock produce entries with the expected timestamp, severity, event, message, and context.
 

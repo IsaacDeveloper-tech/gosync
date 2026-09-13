@@ -24,6 +24,7 @@ type WatchLoopOptions = gosync.WatchLoopOptions
 type WatchCommandOptions = gosync.WatchCommandOptions
 type LogSeverity = gosync.LogSeverity
 type LogEvent = gosync.LogEvent
+type LogEntry = gosync.LogEntry
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -77,3 +78,4 @@ var parseWatchCommand = gosync.ParseWatchCommand
 var runWatchLoop = gosync.RunWatchLoop
 var runWatchCommand = gosync.RunWatchCommand
 var synchronizeDirectories = gosync.SynchronizeDirectories
+var newLogEntry = gosync.NewLogEntry

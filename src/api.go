@@ -3,6 +3,7 @@ package gosync
 import (
 	"io"
 	"io/fs"
+	"time"
 )
 
 var ErrSynchronizationIncomplete = errSynchronizationIncomplete
@@ -120,4 +121,14 @@ func RunWatchCommand(arguments []string, options WatchCommandOptions) error {
 
 func SynchronizeDirectories(roots RootPaths, store ConfirmedStateStore, input io.Reader, output io.Writer) error {
 	return synchronizeDirectories(roots, store, input, output)
+}
+
+func NewLogEntry(
+	clock func() time.Time,
+	severity LogSeverity,
+	event LogEvent,
+	message string,
+	context map[string]string,
+) LogEntry {
+	return newLogEntry(clock, severity, event, message, context)
 }

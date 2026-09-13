@@ -72,6 +72,9 @@ Clarified log placement, synchronization-root overlap, storage-limit failures, a
 Completed log system task 1 by defining the required severity levels and stable event identifiers.
 Added focused domain tests for all four severities and every event in the log event catalog.
 
+Completed log system task 2 by adding timestamped structured entries with injected-clock construction.
+Added tests covering timestamp, severity, event, message, context, and single clock invocation.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 
