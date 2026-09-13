@@ -136,3 +136,11 @@ func NewLogEntry(
 func FormatLogEntry(entry LogEntry) string {
 	return formatLogEntry(entry)
 }
+
+func NewLogSanitizer() *LogSanitizer {
+	return newLogSanitizer()
+}
+
+func NewConsoleDestination(writer io.Writer) ConsoleDestination {
+	return newConsoleDestination(writer)
+}

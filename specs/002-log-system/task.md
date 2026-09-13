@@ -12,15 +12,15 @@
   RF: RF-03, RF-05
   Done when: Tests verify one deterministic text record contains the required date and time, severity, event, and human-readable message.
 
-- [ ] **4. Replace registered protected values** (25 min)
+- [x] **4. Replace registered protected values** (25 min)
   RF: RF-06, RF-10
   Done when: Table-driven tests confirm registered credentials, authentication secrets, and cryptographic keys never appear in sanitized messages.
 
-- [ ] **5. Sanitize errors, paths, and names** (25 min)
+- [x] **5. Sanitize errors, paths, and names** (25 min)
   RF: RF-06, RF-10, RF-11
   Done when: Tests preserve useful error and path context while replacing protected fragments and excluding file contents.
 
-- [ ] **6. Add the console log destination** (20 min)
+- [x] **6. Add the console log destination** (20 min)
   RF: RF-03, RF-13, RF-14
   Done when: Injected-writer tests verify complete record writes and return console write failures without suppressing them.
 

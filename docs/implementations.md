@@ -78,6 +78,9 @@ Added tests covering timestamp, severity, event, message, context, and single cl
 Completed log system task 3 by formatting entries as deterministic structured text records.
 Added tests for RFC3339Nano timestamps, severity, stable event names, quoted messages, and ordered context.
 
+Completed log system tasks 4-6 with protected-value replacement, contextual sanitization, and a console destination.
+Added tests for secret redaction, file-content exclusion, complete writes, and propagated console write failures.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 

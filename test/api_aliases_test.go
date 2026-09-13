@@ -25,6 +25,8 @@ type WatchCommandOptions = gosync.WatchCommandOptions
 type LogSeverity = gosync.LogSeverity
 type LogEvent = gosync.LogEvent
 type LogEntry = gosync.LogEntry
+type LogSanitizer = gosync.LogSanitizer
+type ConsoleDestination = gosync.ConsoleDestination
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -80,3 +82,5 @@ var runWatchCommand = gosync.RunWatchCommand
 var synchronizeDirectories = gosync.SynchronizeDirectories
 var newLogEntry = gosync.NewLogEntry
 var formatLogEntry = gosync.FormatLogEntry
+var newLogSanitizer = gosync.NewLogSanitizer
+var newConsoleDestination = gosync.NewConsoleDestination
