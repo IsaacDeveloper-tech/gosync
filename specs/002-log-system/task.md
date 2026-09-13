@@ -8,7 +8,7 @@
   RF: RF-01, RF-02, RF-04, RF-05
   Done when: Tests using a fixed clock produce entries with the expected timestamp, severity, event, message, and context.
 
-- [ ] **3. Format entries as structured text** (20 min)
+- [x] **3. Format entries as structured text** (20 min)
   RF: RF-03, RF-05
   Done when: Tests verify one deterministic text record contains the required date and time, severity, event, and human-readable message.
 

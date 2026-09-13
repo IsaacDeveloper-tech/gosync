@@ -132,3 +132,7 @@ func NewLogEntry(
 ) LogEntry {
 	return newLogEntry(clock, severity, event, message, context)
 }
+
+func FormatLogEntry(entry LogEntry) string {
+	return formatLogEntry(entry)
+}

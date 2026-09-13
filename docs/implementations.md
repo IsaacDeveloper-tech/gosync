@@ -75,6 +75,9 @@ Added focused domain tests for all four severities and every event in the log ev
 Completed log system task 2 by adding timestamped structured entries with injected-clock construction.
 Added tests covering timestamp, severity, event, message, context, and single clock invocation.
 
+Completed log system task 3 by formatting entries as deterministic structured text records.
+Added tests for RFC3339Nano timestamps, severity, stable event names, quoted messages, and ordered context.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 

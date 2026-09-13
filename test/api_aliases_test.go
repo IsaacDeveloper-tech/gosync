@@ -79,3 +79,4 @@ var runWatchLoop = gosync.RunWatchLoop
 var runWatchCommand = gosync.RunWatchCommand
 var synchronizeDirectories = gosync.SynchronizeDirectories
 var newLogEntry = gosync.NewLogEntry
+var formatLogEntry = gosync.FormatLogEntry
