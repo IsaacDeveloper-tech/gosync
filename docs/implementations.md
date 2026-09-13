@@ -81,6 +81,9 @@ Added tests for RFC3339Nano timestamps, severity, stable event names, quoted mes
 Completed log system tasks 4-6 with protected-value replacement, contextual sanitization, and a console destination.
 Added tests for secret redaction, file-content exclusion, complete writes, and propagated console write failures.
 
+Completed log system tasks 7-11 with per-user location resolution, root-overlap detection, append, rotation, and retention.
+Added filesystem tests for working-directory independence, 10 MB boundaries, preserved records, and four newest archives.
+
 Added the log system implementation plan with modules, data models, execution flow, and justified decisions.
 Mapped RF-01 through RF-14 to planned responsibilities and unit, filesystem, and synchronization test coverage.
 

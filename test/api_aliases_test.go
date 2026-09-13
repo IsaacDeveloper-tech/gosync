@@ -27,6 +27,7 @@ type LogEvent = gosync.LogEvent
 type LogEntry = gosync.LogEntry
 type LogSanitizer = gosync.LogSanitizer
 type ConsoleDestination = gosync.ConsoleDestination
+type RotatingFileDestination = gosync.RotatingFileDestination
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -84,3 +85,6 @@ var newLogEntry = gosync.NewLogEntry
 var formatLogEntry = gosync.FormatLogEntry
 var newLogSanitizer = gosync.NewLogSanitizer
 var newConsoleDestination = gosync.NewConsoleDestination
+var resolveLogDirectory = gosync.ResolveLogDirectory
+var logLocationOverlapsRoots = gosync.LogLocationOverlapsRoots
+var newRotatingFileDestination = gosync.NewRotatingFileDestination

@@ -24,23 +24,23 @@
   RF: RF-03, RF-13, RF-14
   Done when: Injected-writer tests verify complete record writes and return console write failures without suppressing them.
 
-- [ ] **7. Resolve the per-user log location** (20 min)
+- [x] **7. Resolve the per-user log location** (20 min)
   RF: RF-03
   Done when: Tests verify the resolved log directory is under GoSync's operating-system application-data location and is independent of the working directory.
 
-- [ ] **8. Detect log-location and synchronization-root overlap** (20 min)
+- [x] **8. Detect log-location and synchronization-root overlap** (20 min)
   RF: RF-12
   Done when: Tests detect equal and contained log locations for either canonical root while accepting non-overlapping locations.
 
-- [ ] **9. Create and append to the active log file** (25 min)
+- [x] **9. Create and append to the active log file** (25 min)
   RF: RF-03, RF-07
   Done when: Temporary-directory tests verify the active file is created, existing records are preserved, new records are appended, and I/O errors are returned.
 
-- [ ] **10. Rotate the active file at 10 MB** (25 min)
+- [x] **10. Rotate the active file at 10 MB** (25 min)
   RF: RF-08
   Done when: Boundary tests verify rotation before a new record would take a non-empty active file beyond 10,000,000 bytes without losing that record.
 
-- [ ] **11. Retain at most five total log files** (25 min)
+- [x] **11. Retain at most five total log files** (25 min)
   RF: RF-09
   Done when: Repeated-rotation tests retain the active file and four newest archives and remove the oldest generation.
 

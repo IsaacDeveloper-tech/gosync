@@ -144,3 +144,15 @@ func NewLogSanitizer() *LogSanitizer {
 func NewConsoleDestination(writer io.Writer) ConsoleDestination {
 	return newConsoleDestination(writer)
 }
+
+func ResolveLogDirectory() (string, error) {
+	return resolveLogDirectory()
+}
+
+func LogLocationOverlapsRoots(logLocation string, roots RootPaths) (bool, error) {
+	return logLocationOverlapsRoots(logLocation, roots)
+}
+
+func NewRotatingFileDestination(directory string) RotatingFileDestination {
+	return newRotatingFileDestination(directory)
+}
