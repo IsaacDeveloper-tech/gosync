@@ -30,6 +30,9 @@ type ConsoleDestination = gosync.ConsoleDestination
 type RotatingFileDestination = gosync.RotatingFileDestination
 type LoggingCoordinator = gosync.LoggingCoordinator
 type LoggingCoordinatorOptions = gosync.LoggingCoordinatorOptions
+type ConfigurationSnapshot = gosync.ConfigurationSnapshot
+type ConfigurationDraft = gosync.ConfigurationDraft
+type SynchronizationMode = gosync.SynchronizationMode
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -55,10 +58,17 @@ const (
 	LogEventOperationFailed               = gosync.LogEventOperationFailed
 	LogEventPersistentDestinationFailure  = gosync.LogEventPersistentDestinationFailure
 	LogEventConsoleDestinationFailure     = gosync.LogEventConsoleDestinationFailure
+	ConfigurationSchemaVersion            = gosync.ConfigurationSchemaVersion
+	MinimumSynchronizationIntervalSeconds = gosync.MinimumSynchronizationIntervalSeconds
+	MaximumSynchronizationIntervalSeconds = gosync.MaximumSynchronizationIntervalSeconds
+	SynchronizationModeBidirectional      = gosync.SynchronizationModeBidirectional
+	SynchronizationModeUnidirectional     = gosync.SynchronizationModeUnidirectional
+	SynchronizationModeBackup             = gosync.SynchronizationModeBackup
 )
 
 var errSynchronizationIncomplete = gosync.ErrSynchronizationIncomplete
 var errLoggingUnavailable = gosync.ErrLoggingUnavailable
+var errConfigurationCancelled = gosync.ErrConfigurationCancelled
 
 var newConfirmedStateStore = gosync.NewConfirmedStateStore
 var newConfirmedStateStoreAt = gosync.NewConfirmedStateStoreAt
@@ -94,3 +104,12 @@ var newRotatingFileDestination = gosync.NewRotatingFileDestination
 var newLoggingCoordinator = gosync.NewLoggingCoordinator
 var initializeLoggingCoordinator = gosync.InitializeLoggingCoordinator
 var synchronizeDirectoriesWithLogger = gosync.SynchronizeDirectoriesWithLogger
+var parseConfigureCommand = gosync.ParseConfigureCommand
+var parseSynchronizationInterval = gosync.ParseSynchronizationInterval
+var parseSynchronizationMode = gosync.ParseSynchronizationMode
+var collectConfigurationDraft = gosync.CollectConfigurationDraft
+var confirmConfiguration = gosync.ConfirmConfiguration
+var runInteractiveConfiguration = gosync.RunInteractiveConfiguration
+var resolveConfigurationFilePath = gosync.ResolveConfigurationFilePath
+var encodeConfiguration = gosync.EncodeConfiguration
+var decodeConfiguration = gosync.DecodeConfiguration

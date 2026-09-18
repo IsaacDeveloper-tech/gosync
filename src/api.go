@@ -174,3 +174,39 @@ func SynchronizeDirectoriesWithLogger(
 ) error {
 	return synchronizeDirectoriesWithLogger(roots, store, input, output, logger)
 }
+
+func ParseConfigureCommand(arguments []string) error {
+	return parseConfigureCommand(arguments)
+}
+
+func ParseSynchronizationInterval(answer string) (int, error) {
+	return parseSynchronizationInterval(answer)
+}
+
+func ParseSynchronizationMode(answer string) (SynchronizationMode, error) {
+	return parseSynchronizationMode(answer)
+}
+
+func CollectConfigurationDraft(input io.Reader, output io.Writer) (ConfigurationDraft, error) {
+	return collectConfigurationDraft(input, output)
+}
+
+func ConfirmConfiguration(input io.Reader, output io.Writer, draft ConfigurationDraft) (bool, error) {
+	return confirmConfiguration(input, output, draft)
+}
+
+func RunInteractiveConfiguration(input io.Reader, output io.Writer) (ConfigurationSnapshot, error) {
+	return runInteractiveConfiguration(input, output)
+}
+
+func ResolveConfigurationFilePath() (string, error) {
+	return resolveConfigurationFilePath()
+}
+
+func EncodeConfiguration(configuration ConfigurationSnapshot) (string, error) {
+	return encodeConfiguration(configuration)
+}
+
+func DecodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, error) {
+	return decodeConfiguration(encodedConfiguration)
+}

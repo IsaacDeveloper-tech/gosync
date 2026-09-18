@@ -104,3 +104,6 @@ Mapped RF-01 through RF-32 to planned responsibilities and unit, filesystem, CLI
 
 Added the dependency-ordered configuration system task list with work items estimated below 30 minutes.
 Each task identifies its RF coverage and a verifiable completion condition spanning configuration, scheduling, and synchronization behavior.
+
+Completed configuration system tasks 1-10 with the versioned domain, configure parsing, interactive validation, cancellation, location, and strict JSON codec.
+Added tests for valid drafts, confirmation behavior, per-user config location, exact encoding, and malformed or unsupported JSON rejection.

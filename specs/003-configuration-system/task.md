@@ -1,42 +1,42 @@
 # Configuration System Implementation Tasks
 
-- [ ] **1. Define configuration domain types and constants** (15 min)
+- [x] **1. Define configuration domain types and constants** (15 min)
   RF: RF-03, RF-09, RF-10, RF-18, RF-19
   Done when: Tests represent schema version 1, the inclusive interval range, both persisted modes, and immutable configuration snapshots.
 
-- [ ] **2. Extend command parsing for configure** (20 min)
+- [x] **2. Extend command parsing for configure** (20 min)
   RF: RF-01, RF-02, RF-23
   Done when: Tests accept only argument-free `gosync configure` and prove invalid `configure` or `watch` arguments invoke no configuration access.
 
-- [ ] **3. Validate interactive interval answers** (20 min)
+- [x] **3. Validate interactive interval answers** (20 min)
   RF: RF-03, RF-04
   Done when: Tests accept `1` and `86400` and reject out-of-range, fractional, empty, and non-numeric answers with another request.
 
-- [ ] **4. Validate interactive mode answers** (20 min)
+- [x] **4. Validate interactive mode answers** (20 min)
   RF: RF-05, RF-06
   Done when: Tests accept exact bidirectional and unidirectional values, label BACKUP unavailable, and request another mode after BACKUP or unknown input.
 
-- [ ] **5. Build the interactive configuration draft** (25 min)
+- [x] **5. Build the interactive configuration draft** (25 min)
   RF: RF-01, RF-03 through RF-06
   Done when: Injected-stream tests collect one complete valid interval-and-mode draft after any invalid answers.
 
-- [ ] **6. Add summary confirmation and cancellation** (25 min)
+- [x] **6. Add summary confirmation and cancellation** (25 min)
   RF: RF-07, RF-08
   Done when: Tests confirm only an accepted summary can proceed and rejection, EOF, or interruption returns cancellation without persistence.
 
-- [ ] **7. Resolve the global config.json location** (20 min)
+- [x] **7. Resolve the global config.json location** (20 min)
   RF: RF-18, RF-21, RF-26
   Done when: Tests locate `config.json` under GoSync's per-user application-data directory independently from the working directory and return location errors.
 
-- [ ] **8. Encode the exact version-1 JSON document** (20 min)
+- [x] **8. Encode the exact version-1 JSON document** (20 min)
   RF: RF-18
   Done when: Tests encode exactly `schemaVersion`, `synchronizationIntervalSeconds`, and `synchronizationMode` with their required types and values.
 
-- [ ] **9. Decode valid configuration JSON strictly** (25 min)
+- [x] **9. Decode valid configuration JSON strictly** (25 min)
   RF: RF-18, RF-19
   Done when: Tests decode only a complete version-1 object with the exact required properties, capitalization, interval, and persisted mode.
 
-- [ ] **10. Reject ambiguous and unsupported JSON** (25 min)
+- [x] **10. Reject ambiguous and unsupported JSON** (25 min)
   RF: RF-19
   Done when: Table-driven tests reject malformed or trailing JSON, duplicate, unknown or missing properties, wrong capitalization or types, unsupported versions or modes, and invalid intervals.
 
