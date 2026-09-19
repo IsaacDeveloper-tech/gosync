@@ -116,3 +116,15 @@ Added tests for first-run configure, invalid startup configuration, immutable sn
 
 Completed configuration system tasks 31-41 with source-authoritative conflicts, safety and retry reuse, confirmed-state verification, CLI/watch orchestration, and integration coverage.
 Added tests for exact mirroring, source preservation, failure recovery, configured scheduling, startup guards, and the complete project suite.
+
+Defined specification 004 for a strictly unidirectional compressed backup mode using complete ZIP versions and configurable count-based retention.
+Specified atomic failure preservation, archive verification, dedicated destination ownership, unsupported-entry handling, configuration compatibility, and restoration exclusions.
+
+Refined specification 004 after QA review to remove cross-spec conflicts and define conditional configuration schemas, exclusive source ownership, stable snapshots, and process concurrency.
+Clarified interrupted artifacts, prior-version integrity, deterministic retention, blocked files, empty backups, metadata scope, failure rollback, and publication confirmation.
+
+Added the compressed backup implementation plan with modular boundaries, transactional data models, execution sequences, and justified design alternatives.
+Mapped RF-01 through RF-34 to configuration, archive, ownership, integrity, retention, scheduling, logging, and isolated test coverage.
+
+Added 67 dependency-ordered compressed-backup implementation tasks, each estimated below 30 minutes with explicit RF coverage and a verifiable completion condition.
+Sequenced configuration, paths, inventory, state, archive identity, ownership, ZIP handling, recovery, publication, retention, orchestration, and regression work.
