@@ -315,6 +315,10 @@ func VerifyBackupArchiveDigest(archivePath, expectedDigest string) error {
 	return verifyBackupArchiveDigest(archivePath, expectedDigest)
 }
 
+func RunBackupCycle(policy BackupPolicySnapshot, options BackupCycleOptions) error {
+	return runBackupCycle(policy, options)
+}
+
 func InspectBackupSetDestination(store BackupSetStore, sourceRoot string) (BackupDestinationInspection, error) {
 	return inspectBackupSetDestination(store, sourceRoot)
 }

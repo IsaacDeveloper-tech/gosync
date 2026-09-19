@@ -234,60 +234,60 @@
 
 ## Backup Cycle And Watch Orchestration
 
-- [ ] **54. Order backup-cycle validation and recovery** (25 min)
+- [x] **54. Order backup-cycle validation and recovery** (25 min)
   RF: RF-07 through RF-17, RF-21, RF-24
   Done when: An orchestration test runs source validation, state load, read-only destination inspection, confirmed-history verification, pending retention, and candidate cleanup before creation or publication.
 
-- [ ] **55. Complete one successful backup cycle** (25 min)
+- [x] **55. Complete one successful backup cycle** (25 min)
   RF: RF-18 through RF-20, RF-23 through RF-29
   Done when: An end-to-end service test creates, verifies, publishes, confirms, and retains exactly one independent ZIP without changing source bytes.
 
-- [ ] **56. Preserve state across backup-cycle failures** (25 min)
+- [x] **56. Preserve state across backup-cycle failures** (25 min)
   RF: RF-08, RF-09, RF-16, RF-17, RF-20 through RF-24, RF-30, RF-34
   Done when: Failure-injection tests preserve confirmed history, apply no premature retention, clean candidates where possible, and return primary plus cleanup errors.
 
-- [ ] **57. Add backup lifecycle logging events** (20 min)
+- [x] **57. Add backup lifecycle logging events** (20 min)
   RF: RF-11, RF-33, RF-34
   Done when: Tests log cycle start, verification, confirmation, recovery, retention, ownership rejection, success, and failure without file contents or unsanitized protected data.
 
-- [ ] **58. Hold destination ownership for the watch lifetime** (20 min)
+- [x] **58. Hold destination ownership for the watch lifetime** (20 min)
   RF: RF-13, RF-24, RF-33
   Done when: Tests acquire before the first cycle, retain ownership during waits, reject a competing owner, and release after normal stop or failure with release errors propagated.
 
-- [ ] **59. Connect BACKUP to completion-based scheduling** (25 min)
+- [x] **59. Connect BACKUP to completion-based scheduling** (25 min)
   RF: RF-22, RF-31, RF-32
   Done when: Fake-wait tests run immediately, wait only after each completed success or failure, never overlap cycles, and retain the startup interval and retention snapshot.
 
 ## Integration And Regression
 
-- [ ] **60. Add configure CLI integration coverage** (25 min)
+- [x] **60. Add configure CLI integration coverage** (25 min)
   RF: RF-01 through RF-06, RF-34
   Done when: CLI tests cover BACKUP selection, repeated invalid retention, default 3, summary, confirmation, cancellation, exact version-2 persistence, and version-1 compatibility.
 
-- [ ] **61. Add ZIP filesystem integration coverage** (25 min)
+- [x] **61. Add ZIP filesystem integration coverage** (25 min)
   RF: RF-18, RF-19, RF-23, RF-25 through RF-27
   Done when: Temporary-root tests extract empty and non-empty backups to the exact source hierarchy, verify DEFLATE payloads, and find no extra source-tree manifest entry.
 
-- [ ] **62. Add destination integrity and recovery coverage** (25 min)
+- [x] **62. Add destination integrity and recovery coverage** (25 min)
   RF: RF-12, RF-14 through RF-17, RF-24, RF-26
   Done when: Filesystem tests cover binding, foreign entries, owned candidates, missing and corrupted archives, unsupported destination types, and failed recovery cleanup without unsafe deletion.
 
-- [ ] **63. Add transactional retention integration coverage** (25 min)
+- [x] **63. Add transactional retention integration coverage** (25 min)
   RF: RF-24, RF-28 through RF-30
   Done when: Tests cover limits 1 and 100, repeated clocks, multiple expirations, every pending-removal interruption, deletion failure, publication blocking, and resumed cleanup.
 
-- [ ] **64. Add real-process ownership coverage** (25 min)
+- [x] **64. Add real-process ownership coverage** (25 min)
   RF: RF-13, RF-14, RF-22, RF-24
   Done when: Process tests reject a concurrent destination owner through path aliases and prove owner termination permits later acquisition without manual stale-lock cleanup.
 
-- [ ] **65. Add configured watch and logging coverage** (25 min)
+- [x] **65. Add configured watch and logging coverage** (25 min)
   RF: RF-07, RF-11, RF-20, RF-22, RF-31 through RF-34
   Done when: Integration tests prove source immutability, console-only log overlap, complete lifecycle events, immediate cycles, post-completion waits, non-overlap, and startup snapshot retention.
 
-- [ ] **66. Add existing-mode and exhaustive error regressions** (25 min)
+- [x] **66. Add existing-mode and exhaustive error regressions** (25 min)
   RF: RF-06, RF-24, RF-34
   Done when: Tests keep version-1, bidirectional, and unidirectional behavior unchanged and cover every planned configuration, lock, state, ZIP, publication, deletion, logging, and cleanup failure boundary.
 
-- [ ] **67. Run the complete project test suite** (10 min)
+- [x] **67. Run the complete project test suite** (10 min)
   RF: RF-01 through RF-34
   Done when: `go test ./...` passes with automated coverage for every compressed-backup requirement and defined error behavior.

@@ -26,4 +26,12 @@ const (
 	LogEventConfigurationSucceeded
 	LogEventConfigurationCancelled
 	LogEventConfigurationFailed
+	LogEventBackupCycleStarted
+	LogEventBackupArchiveVerified
+	LogEventBackupArchiveConfirmed
+	LogEventBackupRetentionApplied
+	LogEventBackupCandidateRecovered
+	LogEventBackupCycleFailed
+	LogEventBackupCycleCompleted
+	LogEventBackupOwnershipRejected
 )

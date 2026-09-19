@@ -59,6 +59,7 @@ type BackupDestinationInspectionStatus = gosync.BackupDestinationInspectionStatu
 type BackupDestinationInspection = gosync.BackupDestinationInspection
 type BackupDestinationEntry = gosync.BackupDestinationEntry
 type BackupDestinationEntryKind = gosync.BackupDestinationEntryKind
+type BackupCycleOptions = gosync.BackupCycleOptions
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -124,6 +125,13 @@ const (
 	BackupDestinationEntryPendingRemoval  = gosync.BackupDestinationEntryPendingRemoval
 	BackupDestinationEntryOwnedCandidate  = gosync.BackupDestinationEntryOwnedCandidate
 	BackupDestinationEntryForeign         = gosync.BackupDestinationEntryForeign
+	LogEventBackupCycleStarted            = gosync.LogEventBackupCycleStarted
+	LogEventBackupArchiveVerified         = gosync.LogEventBackupArchiveVerified
+	LogEventBackupArchiveConfirmed        = gosync.LogEventBackupArchiveConfirmed
+	LogEventBackupRetentionApplied        = gosync.LogEventBackupRetentionApplied
+	LogEventBackupCandidateRecovered      = gosync.LogEventBackupCandidateRecovered
+	LogEventBackupCycleFailed             = gosync.LogEventBackupCycleFailed
+	LogEventBackupOwnershipRejected       = gosync.LogEventBackupOwnershipRejected
 	LogEventConfigurationStarted          = gosync.LogEventConfigurationStarted
 	LogEventConfigurationSucceeded        = gosync.LogEventConfigurationSucceeded
 	LogEventConfigurationCancelled        = gosync.LogEventConfigurationCancelled
@@ -222,6 +230,7 @@ var markBackupArchivePendingRemoval = gosync.MarkBackupArchivePendingRemoval
 var resumeBackupPendingRemoval = gosync.ResumeBackupPendingRemoval
 var executeBackupRetention = gosync.ExecuteBackupRetention
 var validateBackupRetentionCompliance = gosync.ValidateBackupRetentionCompliance
+var runBackupCycle = gosync.RunBackupCycle
 var validateUnidirectionalRoots = gosync.ValidateUnidirectionalRoots
 var synchronizeUnidirectional = gosync.SynchronizeUnidirectional
 var generateUnidirectionalSynchronizationPlan = gosync.GenerateUnidirectionalSynchronizationPlan

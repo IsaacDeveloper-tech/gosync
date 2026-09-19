@@ -79,6 +79,22 @@ func logEventName(event LogEvent) string {
 		return "configuration_cancelled"
 	case LogEventConfigurationFailed:
 		return "configuration_failed"
+	case LogEventBackupCycleStarted:
+		return "backup_cycle_started"
+	case LogEventBackupArchiveVerified:
+		return "backup_archive_verified"
+	case LogEventBackupArchiveConfirmed:
+		return "backup_archive_confirmed"
+	case LogEventBackupRetentionApplied:
+		return "backup_retention_applied"
+	case LogEventBackupCandidateRecovered:
+		return "backup_candidate_recovered"
+	case LogEventBackupCycleFailed:
+		return "backup_cycle_failed"
+	case LogEventBackupCycleCompleted:
+		return "backup_cycle_completed"
+	case LogEventBackupOwnershipRejected:
+		return "backup_ownership_rejected"
 	default:
 		return "unknown_event"
 	}

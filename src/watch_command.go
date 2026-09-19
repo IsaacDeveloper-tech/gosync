@@ -111,6 +111,33 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 					Logger: logger,
 				})
 			}
+		case SynchronizationModeBackup:
+			backupPolicy, err := buildBackupPolicySnapshot(roots, configuration)
+			if err != nil {
+				return err
+			}
+			applicationDataDirectory := filepath.Dir(configurationStore.Path())
+			backupStore, err := newBackupSetStoreAt(applicationDataDirectory, backupPolicy.Destination)
+			if err != nil {
+				return err
+			}
+			ownership, err := acquireBackupDestinationOwnership(backupStore.LockPath())
+			if err != nil {
+				if logger != nil {
+					logErr := logger.Log(LogEntry{Severity: LogSeverityError, Event: LogEventBackupOwnershipRejected, Message: "backup destination ownership rejected", Context: map[string]string{"error": err.Error()}})
+					return errors.Join(err, logErr)
+				}
+				return err
+			}
+			return runBackupWatchLoop(backupPolicy, BackupCycleOptions{
+				ApplicationDataDirectory: applicationDataDirectory,
+				Logger:                   logger,
+				Notify:                   func(message string) { _, _ = fmt.Fprintln(output, message) },
+			}, ownership, WatchLoopOptions{
+				Interval: time.Duration(configuration.SynchronizationIntervalSeconds) * time.Second,
+				Stop:     options.Stop,
+				Wait:     options.Wait,
+			})
 		default:
 			return fmt.Errorf("unsupported synchronization mode %q", configuration.SynchronizationMode)
 		}
