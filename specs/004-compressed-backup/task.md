@@ -168,67 +168,67 @@
 
 ## Destination Inspection And Recovery
 
-- [ ] **39. Inspect missing, empty, and state-bound destinations** (20 min)
+- [x] **39. Inspect missing, empty, and state-bound destinations** (20 min)
   RF: RF-09, RF-12, RF-14, RF-15
   Done when: Read-only tests return distinct missing, empty-unbound, and bound-directory outcomes without creating or deleting entries.
 
-- [ ] **40. Enforce canonical source binding** (20 min)
+- [x] **40. Enforce canonical source binding** (20 min)
   RF: RF-14, RF-24
   Done when: Tests bind the first confirmed source, accept aliases of that canonical path, and reject a different source before destination mutation.
 
-- [ ] **41. Classify confirmed and pending-removal versions** (25 min)
+- [x] **41. Classify confirmed and pending-removal versions** (25 min)
   RF: RF-15, RF-17, RF-26, RF-29, RF-30
   Done when: Tests reconcile state records with exact destination filenames and distinguish confirmed records from in-progress retention transactions.
 
-- [ ] **42. Classify owned candidates and foreign entries** (25 min)
+- [x] **42. Classify owned candidates and foreign entries** (25 min)
   RF: RF-15, RF-16, RF-26
   Done when: Tests recognize only unrecorded ZIPs with matching strict identity as owned candidates and classify every other extra entry as foreign without mutation.
 
-- [ ] **43. Reject damaged confirmed backup history** (25 min)
+- [x] **43. Reject damaged confirmed backup history** (25 min)
   RF: RF-17, RF-24, RF-25
   Done when: Tests block mutation for missing, renamed, altered, unreadable, corrupt, or wrongly owned confirmed versions and identify the affected archive.
 
-- [ ] **44. Recover owned unconfirmed candidates** (20 min)
+- [x] **44. Recover owned unconfirmed candidates** (20 min)
   RF: RF-15, RF-16, RF-24, RF-26
   Done when: Tests validate confirmed history first, report and remove every owned candidate, preserve foreign entries, and stop publication if candidate cleanup fails.
 
 ## Publication And Confirmation
 
-- [ ] **45. Create identifiable temporary archives** (20 min)
+- [x] **45. Create identifiable temporary archives** (20 min)
   RF: RF-16, RF-18, RF-24, RF-26
   Done when: Tests create candidates only inside the validated destination with identity sufficient for later recovery and remove them after pre-publication failure when possible.
 
-- [ ] **46. Enforce three-way source stability** (25 min)
+- [x] **46. Enforce three-way source stability** (25 min)
   RF: RF-20, RF-21, RF-23, RF-25
   Done when: Tests require initial, archived, and final inventories to match, accept metadata-only changes, and reject additions, deletions, renames, type changes, or content changes.
 
-- [ ] **47. Publish verified archives atomically** (20 min)
+- [x] **47. Publish verified archives atomically** (20 min)
   RF: RF-24 through RF-27
   Done when: Tests rename only a closed and verified candidate to its unique final name and leave failed or interrupted publication unconfirmed.
 
-- [ ] **48. Commit archive confirmation state** (25 min)
+- [x] **48. Commit archive confirmation state** (25 min)
   RF: RF-14, RF-24, RF-26 through RF-28
   Done when: Tests classify a ZIP as confirmed only after atomic state records source binding, filename, identity, archive and inventory digests, and confirmation order.
 
-- [ ] **49. Roll back a failed first destination** (25 min)
+- [x] **49. Roll back a failed first destination** (25 min)
   RF: RF-08, RF-09, RF-16, RF-24
   Done when: Tests remove owned work and the newly created empty destination before confirmation, preserve pre-existing destinations, and report primary and rollback failures separately.
 
 ## Retention
 
-- [ ] **50. Plan retention by confirmation order** (20 min)
+- [x] **50. Plan retention by confirmation order** (20 min)
   RF: RF-28, RF-29
   Done when: Tests select only the oldest confirmed records beyond retention counts 1 through 100, independent of filenames, clocks, and filesystem timestamps.
 
-- [ ] **51. Mark expired versions before deletion** (20 min)
+- [x] **51. Mark expired versions before deletion** (20 min)
   RF: RF-24, RF-29, RF-30
   Done when: Tests atomically persist pending removal before deleting an expired ZIP and never select the newest retained version.
 
-- [ ] **52. Complete and resume pending removals** (25 min)
+- [x] **52. Complete and resume pending removals** (25 min)
   RF: RF-17, RF-24, RF-29, RF-30
   Done when: Interruption tests resume before later publication whether the pending ZIP still exists or its deletion completed before state finalization.
 
-- [ ] **53. Block publication after retention failure** (20 min)
+- [x] **53. Block publication after retention failure** (20 min)
   RF: RF-29, RF-30
   Done when: Tests keep the new ZIP confirmed, report deletion failure, publish nothing further while over limit, and resume publication only after compliance is restored.
 

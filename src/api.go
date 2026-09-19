@@ -315,6 +315,62 @@ func VerifyBackupArchiveDigest(archivePath, expectedDigest string) error {
 	return verifyBackupArchiveDigest(archivePath, expectedDigest)
 }
 
+func InspectBackupSetDestination(store BackupSetStore, sourceRoot string) (BackupDestinationInspection, error) {
+	return inspectBackupSetDestination(store, sourceRoot)
+}
+
+func BindBackupSetSource(state BackupSetState, sourceRoot string) (BackupSetState, error) {
+	return bindBackupSetSource(state, sourceRoot)
+}
+
+func ValidateBackupSetSourceBinding(state BackupSetState, sourceRoot string) error {
+	return validateBackupSetSourceBinding(state, sourceRoot)
+}
+
+func RecoverOwnedBackupCandidates(store BackupSetStore, sourceRoot string) error {
+	return recoverOwnedBackupCandidates(store, sourceRoot)
+}
+
+func CreateBackupArchiveCandidate(destinationDirectory, archiveID string) (string, error) {
+	return createBackupArchiveCandidate(destinationDirectory, archiveID)
+}
+
+func VerifyBackupSourceStability(initial, archived, final BackupLogicalInventory) error {
+	return verifyBackupSourceStability(initial, archived, final)
+}
+
+func PublishBackupArchive(candidatePath, finalPath string) error {
+	return publishBackupArchive(candidatePath, finalPath)
+}
+
+func ConfirmBackupArchive(store BackupSetStore, state BackupSetState, identity BackupArchiveIdentity, archivePath, archiveDigest string) (BackupSetState, error) {
+	return confirmBackupArchive(store, state, identity, archivePath, archiveDigest)
+}
+
+func RollbackBackupFirstCycle(destinationDirectory, candidatePath string) error {
+	return rollbackBackupFirstCycle(destinationDirectory, candidatePath)
+}
+
+func PlanBackupRetention(state BackupSetState, retentionCount int) ([]BackupArchiveRecord, error) {
+	return planBackupRetention(state, retentionCount)
+}
+
+func MarkBackupArchivePendingRemoval(store BackupSetStore, state BackupSetState, record BackupArchiveRecord) (BackupSetState, error) {
+	return markBackupArchivePendingRemoval(store, state, record)
+}
+
+func ResumeBackupPendingRemoval(store BackupSetStore, state BackupSetState) (BackupSetState, error) {
+	return resumeBackupPendingRemoval(store, state)
+}
+
+func ExecuteBackupRetention(store BackupSetStore, state BackupSetState, retentionCount int) error {
+	return executeBackupRetention(store, state, retentionCount)
+}
+
+func ValidateBackupRetentionCompliance(state BackupSetState, retentionCount int) error {
+	return validateBackupRetentionCompliance(state, retentionCount)
+}
+
 func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
 	return validateConfigurationPath(configurationPath, roots)
 }

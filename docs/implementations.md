@@ -140,3 +140,6 @@ Added tests for unsupported and blocked entries, metadata-independent digests, s
 
 Completed compressed-backup Archive Identity, Destination Ownership, and ZIP Verification tasks 26-38 with strict ZIP metadata, canonical destination locks, deterministic naming, DEFLATE archives, and integrity verification.
 Added tests for identity mismatches, concurrent ownership, empty and structured archives, unsafe entries, CRC failures, inventory mismatches, and whole-archive digest changes.
+
+Completed compressed-backup Destination Inspection, Publication, Confirmation, and Retention tasks 39-53 with read-only classification, candidate recovery, stable-source checks, atomic publication, confirmed state commits, and pending-removal retention.
+Added tests for source binding, damaged history, foreign entries, rollback, retention ordering, deletion recovery, and publication blocking after cleanup failure.
