@@ -38,11 +38,32 @@ func parseSynchronizationMode(answer string) (SynchronizationMode, error) {
 		return SynchronizationModeBidirectional, nil
 	case string(SynchronizationModeUnidirectional):
 		return SynchronizationModeUnidirectional, nil
-	case string(SynchronizationModeBackup):
-		return "", errors.New("BACKUP mode is not available")
+	case string(SynchronizationModeBackup), "BACKUP":
+		return SynchronizationModeBackup, nil
 	default:
 		return "", fmt.Errorf("unsupported synchronization mode %q", strings.TrimSpace(answer))
 	}
+}
+
+func parseBackupRetentionCount(answer string) (int, error) {
+	trimmedAnswer := strings.TrimSpace(answer)
+	if trimmedAnswer == "" {
+		return 0, errors.New("backup retention must be a whole number")
+	}
+	for _, character := range trimmedAnswer {
+		if character < '0' || character > '9' {
+			return 0, errors.New("backup retention must be a whole number")
+		}
+	}
+
+	retentionCount, err := strconv.Atoi(trimmedAnswer)
+	if err != nil {
+		return 0, fmt.Errorf("parse backup retention: %w", err)
+	}
+	if retentionCount < MinimumBackupRetentionCount || retentionCount > MaximumBackupRetentionCount {
+		return 0, fmt.Errorf("backup retention must be between %d and %d versions", MinimumBackupRetentionCount, MaximumBackupRetentionCount)
+	}
+	return retentionCount, nil
 }
 
 func collectConfigurationDraft(input io.Reader, output io.Writer) (ConfigurationDraft, error) {
@@ -74,7 +95,7 @@ func collectConfigurationDraftWithReader(reader *bufio.Reader, output io.Writer)
 	}
 
 	for {
-		if _, err := fmt.Fprint(output, "Synchronization mode (bidirectional, unidirectional, BACKUP [unavailable]): "); err != nil {
+		if _, err := fmt.Fprint(output, "Synchronization mode (bidirectional, unidirectional, BACKUP): "); err != nil {
 			return ConfigurationDraft{}, fmt.Errorf("write mode prompt: %w", err)
 		}
 		answer, err := readConfigurationAnswer(reader)
@@ -92,6 +113,31 @@ func collectConfigurationDraftWithReader(reader *bufio.Reader, output io.Writer)
 		break
 	}
 
+	if draft.Mode == SynchronizationModeBackup {
+		for {
+			if _, err := fmt.Fprintf(output, "Backup retention count (1-%d, default 3): ", MaximumBackupRetentionCount); err != nil {
+				return ConfigurationDraft{}, fmt.Errorf("write retention prompt: %w", err)
+			}
+			answer, err := readConfigurationAnswer(reader)
+			if err != nil {
+				return ConfigurationDraft{}, configurationInputError(err)
+			}
+			if strings.TrimSpace(answer) == "" {
+				draft.BackupRetentionCount = 3
+				break
+			}
+			retentionCount, err := parseBackupRetentionCount(answer)
+			if err != nil {
+				if _, writeErr := fmt.Fprintf(output, "Invalid retention: %v. Please try again.\n", err); writeErr != nil {
+					return ConfigurationDraft{}, fmt.Errorf("write retention validation: %w", writeErr)
+				}
+				continue
+			}
+			draft.BackupRetentionCount = retentionCount
+			break
+		}
+	}
+
 	return draft, nil
 }
 
@@ -106,12 +152,23 @@ func confirmConfigurationWithReader(reader *bufio.Reader, output io.Writer, draf
 	if draft.IntervalSeconds < MinimumSynchronizationIntervalSeconds || draft.IntervalSeconds > MaximumSynchronizationIntervalSeconds {
 		return false, errors.New("cannot confirm an invalid interval")
 	}
-	if draft.Mode != SynchronizationModeBidirectional && draft.Mode != SynchronizationModeUnidirectional {
+	if draft.Mode != SynchronizationModeBidirectional && draft.Mode != SynchronizationModeUnidirectional && draft.Mode != SynchronizationModeBackup {
 		return false, errors.New("cannot confirm an invalid synchronization mode")
+	}
+	if draft.Mode == SynchronizationModeBackup && (draft.BackupRetentionCount < MinimumBackupRetentionCount || draft.BackupRetentionCount > MaximumBackupRetentionCount) {
+		return false, errors.New("cannot confirm an invalid backup retention count")
+	}
+	if draft.Mode != SynchronizationModeBackup && draft.BackupRetentionCount != 0 {
+		return false, errors.New("backup retention is only valid for BACKUP mode")
 	}
 
 	if _, err := fmt.Fprintf(output, "Configuration summary:\n  interval: %d seconds\n  mode: %s\n", draft.IntervalSeconds, draft.Mode); err != nil {
 		return false, fmt.Errorf("write configuration summary: %w", err)
+	}
+	if draft.Mode == SynchronizationModeBackup {
+		if _, err := fmt.Fprintf(output, "  retention: %d versions\n", draft.BackupRetentionCount); err != nil {
+			return false, fmt.Errorf("write retention summary: %w", err)
+		}
 	}
 	for {
 		if _, err := fmt.Fprint(output, "Save configuration? (yes/no): "); err != nil {
@@ -155,6 +212,7 @@ func runInteractiveConfiguration(input io.Reader, output io.Writer) (Configurati
 		SchemaVersion:                  ConfigurationSchemaVersion,
 		SynchronizationIntervalSeconds: draft.IntervalSeconds,
 		SynchronizationMode:            draft.Mode,
+		BackupRetentionCount:           draft.BackupRetentionCount,
 	}, nil
 }
 

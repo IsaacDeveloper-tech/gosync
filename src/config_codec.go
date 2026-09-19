@@ -13,15 +13,31 @@ func encodeConfiguration(configuration ConfigurationSnapshot) (string, error) {
 		return "", err
 	}
 
-	encodedConfiguration, err := json.Marshal(struct {
-		SchemaVersion                  int                 `json:"schemaVersion"`
-		SynchronizationIntervalSeconds int                 `json:"synchronizationIntervalSeconds"`
-		SynchronizationMode            SynchronizationMode `json:"synchronizationMode"`
-	}{
-		SchemaVersion:                  configuration.SchemaVersion,
-		SynchronizationIntervalSeconds: configuration.SynchronizationIntervalSeconds,
-		SynchronizationMode:            configuration.SynchronizationMode,
-	})
+	var encodedConfiguration []byte
+	var err error
+	if configuration.SchemaVersion == LegacyConfigurationSchemaVersion || configuration.SynchronizationMode != SynchronizationModeBackup {
+		encodedConfiguration, err = json.Marshal(struct {
+			SchemaVersion                  int                 `json:"schemaVersion"`
+			SynchronizationIntervalSeconds int                 `json:"synchronizationIntervalSeconds"`
+			SynchronizationMode            SynchronizationMode `json:"synchronizationMode"`
+		}{
+			SchemaVersion:                  configuration.SchemaVersion,
+			SynchronizationIntervalSeconds: configuration.SynchronizationIntervalSeconds,
+			SynchronizationMode:            configuration.SynchronizationMode,
+		})
+	} else {
+		encodedConfiguration, err = json.Marshal(struct {
+			SchemaVersion                  int                 `json:"schemaVersion"`
+			SynchronizationIntervalSeconds int                 `json:"synchronizationIntervalSeconds"`
+			SynchronizationMode            SynchronizationMode `json:"synchronizationMode"`
+			BackupRetentionCount           int                 `json:"backupRetentionCount"`
+		}{
+			SchemaVersion:                  configuration.SchemaVersion,
+			SynchronizationIntervalSeconds: configuration.SynchronizationIntervalSeconds,
+			SynchronizationMode:            configuration.SynchronizationMode,
+			BackupRetentionCount:           configuration.BackupRetentionCount,
+		})
+	}
 	if err != nil {
 		return "", fmt.Errorf("encode configuration: %w", err)
 	}
@@ -39,7 +55,7 @@ func decodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, er
 		return ConfigurationSnapshot{}, errorsInvalidConfigurationObject()
 	}
 
-	values := make(map[string]json.RawMessage, 3)
+	values := make(map[string]json.RawMessage, 4)
 	for decoder.More() {
 		propertyToken, err := decoder.Token()
 		if err != nil {
@@ -52,7 +68,7 @@ func decodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, er
 		if _, duplicate := values[propertyName]; duplicate {
 			return ConfigurationSnapshot{}, fmt.Errorf("duplicate configuration property %q", propertyName)
 		}
-		if propertyName != "schemaVersion" && propertyName != "synchronizationIntervalSeconds" && propertyName != "synchronizationMode" {
+		if propertyName != "schemaVersion" && propertyName != "synchronizationIntervalSeconds" && propertyName != "synchronizationMode" && propertyName != "backupRetentionCount" {
 			return ConfigurationSnapshot{}, fmt.Errorf("unknown configuration property %q", propertyName)
 		}
 
@@ -101,6 +117,25 @@ func decodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, er
 		SchemaVersion:                  schemaVersion,
 		SynchronizationIntervalSeconds: interval,
 		SynchronizationMode:            SynchronizationMode(mode),
+	}
+	_, hasRetention := values["backupRetentionCount"]
+	if schemaVersion == LegacyConfigurationSchemaVersion {
+		if hasRetention {
+			return ConfigurationSnapshot{}, fmt.Errorf("legacy configuration cannot define backup retention")
+		}
+	} else if schemaVersion == ConfigurationSchemaVersion {
+		if configuration.SynchronizationMode == SynchronizationModeBackup {
+			if !hasRetention {
+				return ConfigurationSnapshot{}, fmt.Errorf("missing configuration property %q", "backupRetentionCount")
+			}
+			retentionCount, err := decodeConfigurationInteger(values["backupRetentionCount"], "backupRetentionCount")
+			if err != nil {
+				return ConfigurationSnapshot{}, err
+			}
+			configuration.BackupRetentionCount = retentionCount
+		} else if hasRetention {
+			return ConfigurationSnapshot{}, fmt.Errorf("backup retention is only valid for BACKUP mode")
+		}
 	}
 	if err := validateConfigurationSnapshot(configuration); err != nil {
 		return ConfigurationSnapshot{}, err

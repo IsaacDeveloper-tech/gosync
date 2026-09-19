@@ -187,6 +187,10 @@ func ParseSynchronizationMode(answer string) (SynchronizationMode, error) {
 	return parseSynchronizationMode(answer)
 }
 
+func ParseBackupRetentionCount(answer string) (int, error) {
+	return parseBackupRetentionCount(answer)
+}
+
 func CollectConfigurationDraft(input io.Reader, output io.Writer) (ConfigurationDraft, error) {
 	return collectConfigurationDraft(input, output)
 }
@@ -209,6 +213,10 @@ func EncodeConfiguration(configuration ConfigurationSnapshot) (string, error) {
 
 func DecodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, error) {
 	return decodeConfiguration(encodedConfiguration)
+}
+
+func ValidateConfigurationSnapshot(configuration ConfigurationSnapshot) error {
+	return validateConfigurationSnapshot(configuration)
 }
 
 func InspectConfigurationFile(path string) (ConfigurationFileStatus, error) {

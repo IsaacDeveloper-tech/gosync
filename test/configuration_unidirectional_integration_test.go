@@ -183,7 +183,7 @@ func TestConfigureCommandIntegrationRejectsArgumentsAndSavesValidConfiguration(t
 	if _, err := os.Stat(configPath); !os.IsNotExist(err) {
 		t.Fatalf("config after invalid command error = %v, want no file", err)
 	}
-	if err := runConfigureCommand([]string{"configure"}, ConfigureCommandOptions{Store: &store, Input: strings.NewReader("0\n60\nBACKUP\nbidirectional\nyes\n"), Output: io.Discard}); err != nil {
+	if err := runConfigureCommand([]string{"configure"}, ConfigureCommandOptions{Store: &store, Input: strings.NewReader("0\n60\nBACKUP\n3\nyes\n"), Output: io.Discard}); err != nil {
 		t.Fatalf("RunConfigureCommand(valid flow) error = %v", err)
 	}
 	loaded, err := store.Load()

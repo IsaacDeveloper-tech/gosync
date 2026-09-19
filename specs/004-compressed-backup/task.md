@@ -2,35 +2,35 @@
 
 ## Configuration Foundation
 
-- [ ] **1. Extend the configuration domain to schema version 2** (20 min)
+- [x] **1. Extend the configuration domain to schema version 2** (20 min)
   RF: RF-01, RF-02, RF-05, RF-06
   Done when: Tests represent version-1 compatibility and both exact version-2 variants, with retention present only for BACKUP and constrained to 1 through 100.
 
-- [ ] **2. Present BACKUP as an available mode** (15 min)
+- [x] **2. Present BACKUP as an available mode** (15 min)
   RF: RF-01
   Done when: Interactive tests offer bidirectional, unidirectional, and BACKUP as selectable modes without the previous unavailable warning.
 
-- [ ] **3. Validate interactive retention answers** (20 min)
+- [x] **3. Validate interactive retention answers** (20 min)
   RF: RF-02, RF-03
   Done when: Tests accept 1, 3, and 100, map an empty answer to 3, and repeat zero, negative, fractional, non-numeric, 101, and unrepresentable values.
 
-- [ ] **4. Add retention to the BACKUP draft and summary** (20 min)
+- [x] **4. Add retention to the BACKUP draft and summary** (20 min)
   RF: RF-02, RF-04
   Done when: Tests include retention in a BACKUP summary only and prove rejection, EOF, or interruption persists neither mode nor retention.
 
-- [ ] **5. Encode exact version-2 configuration variants** (20 min)
+- [x] **5. Encode exact version-2 configuration variants** (20 min)
   RF: RF-05
   Done when: Tests encode exactly three properties for non-backup modes and exactly four for BACKUP, using lowercase `backup` and no additional properties.
 
-- [ ] **6. Decode valid version-1 and version-2 configurations** (25 min)
+- [x] **6. Decode valid version-1 and version-2 configurations** (25 min)
   RF: RF-05, RF-06
   Done when: Table-driven tests load existing valid version-1 modes and both valid version-2 property sets into immutable snapshots.
 
-- [ ] **7. Reject invalid conditional configuration schemas** (25 min)
+- [x] **7. Reject invalid conditional configuration schemas** (25 min)
   RF: RF-05, RF-06
   Done when: Tests reject malformed, duplicate, unknown, missing, mis-capitalized, incorrectly typed, out-of-range, mode-incompatible, and unsupported-version JSON.
 
-- [ ] **8. Persist confirmed BACKUP configuration** (25 min)
+- [x] **8. Persist confirmed BACKUP configuration** (25 min)
   RF: RF-01 through RF-06, RF-34
   Done when: A service test confirms BACKUP, atomically stores its exact version-2 document, preserves the previous document on cancellation or failure, and leaves version-1 loading unchanged.
 

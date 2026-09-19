@@ -10,8 +10,8 @@ import (
 )
 
 func TestConfigurationDomainDefinesVersionRangeModesAndSnapshots(t *testing.T) {
-	if ConfigurationSchemaVersion != 1 {
-		t.Fatalf("schema version = %d, want 1", ConfigurationSchemaVersion)
+	if ConfigurationSchemaVersion != 2 {
+		t.Fatalf("schema version = %d, want 2", ConfigurationSchemaVersion)
 	}
 	if MinimumSynchronizationIntervalSeconds != 1 || MaximumSynchronizationIntervalSeconds != 86400 {
 		t.Fatalf("interval range = %d..%d, want 1..86400", MinimumSynchronizationIntervalSeconds, MaximumSynchronizationIntervalSeconds)
@@ -57,7 +57,7 @@ func TestParseSynchronizationIntervalAcceptsInclusiveBoundsAndRejectsInvalidAnsw
 	}
 }
 
-func TestParseSynchronizationModeAcceptsPersistedModesAndRejectsBackup(t *testing.T) {
+func TestParseSynchronizationModeAcceptsPersistedModesAndBackup(t *testing.T) {
 	for _, testCase := range []struct {
 		answer string
 		mode   SynchronizationMode
@@ -70,15 +70,21 @@ func TestParseSynchronizationModeAcceptsPersistedModesAndRejectsBackup(t *testin
 			t.Fatalf("parseSynchronizationMode(%q) = %q, %v, want %q", testCase.answer, mode, err, testCase.mode)
 		}
 	}
-	for _, answer := range []string{"BACKUP", "backup", "unknown", ""} {
+	for _, answer := range []string{"unknown", ""} {
 		if _, err := parseSynchronizationMode(answer); err == nil {
 			t.Fatalf("parseSynchronizationMode(%q) error = nil, want invalid-mode error", answer)
+		}
+	}
+	for _, answer := range []string{"BACKUP", "backup"} {
+		mode, err := parseSynchronizationMode(answer)
+		if err != nil || mode != SynchronizationModeBackup {
+			t.Fatalf("parseSynchronizationMode(%q) = %q, %v, want BACKUP mode", answer, mode, err)
 		}
 	}
 }
 
 func TestCollectConfigurationDraftRepeatsInvalidIntervalAndModeAnswers(t *testing.T) {
-	input := strings.NewReader("0\n60\nBACKUP\nunidirectional\n")
+	input := strings.NewReader("0\n60\nunknown\nunidirectional\n")
 	var output strings.Builder
 
 	draft, err := collectConfigurationDraft(input, &output)
@@ -88,8 +94,8 @@ func TestCollectConfigurationDraftRepeatsInvalidIntervalAndModeAnswers(t *testin
 	if draft.IntervalSeconds != 60 || draft.Mode != SynchronizationModeUnidirectional {
 		t.Fatalf("draft = %+v, want interval 60 and unidirectional mode", draft)
 	}
-	if !strings.Contains(output.String(), "BACKUP") || !strings.Contains(output.String(), "unavailable") {
-		t.Fatalf("interactive output = %q, want unavailable BACKUP explanation", output.String())
+	if !strings.Contains(output.String(), "BACKUP") || strings.Contains(output.String(), "unavailable") {
+		t.Fatalf("interactive output = %q, want available BACKUP prompt", output.String())
 	}
 }
 
@@ -207,7 +213,7 @@ func TestDecodeConfigurationRejectsAmbiguousAndUnsupportedJSON(t *testing.T) {
 		{name: "wrong capitalization", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":60,"SynchronizationMode":"bidirectional"}`},
 		{name: "wrong interval type", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":"60","synchronizationMode":"bidirectional"}`},
 		{name: "wrong mode type", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":60,"synchronizationMode":true}`},
-		{name: "unsupported version", data: `{"schemaVersion":2,"synchronizationIntervalSeconds":60,"synchronizationMode":"bidirectional"}`},
+		{name: "unsupported version", data: `{"schemaVersion":3,"synchronizationIntervalSeconds":60,"synchronizationMode":"bidirectional"}`},
 		{name: "fractional interval", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":60.5,"synchronizationMode":"bidirectional"}`},
 		{name: "low interval", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":0,"synchronizationMode":"bidirectional"}`},
 		{name: "high interval", data: `{"schemaVersion":1,"synchronizationIntervalSeconds":86401,"synchronizationMode":"bidirectional"}`},

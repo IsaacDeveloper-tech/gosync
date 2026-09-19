@@ -128,3 +128,6 @@ Mapped RF-01 through RF-34 to configuration, archive, ownership, integrity, rete
 
 Added 67 dependency-ordered compressed-backup implementation tasks, each estimated below 30 minutes with explicit RF coverage and a verifiable completion condition.
 Sequenced configuration, paths, inventory, state, archive identity, ownership, ZIP handling, recovery, publication, retention, orchestration, and regression work.
+
+Completed compressed-backup Configuration Foundation tasks 1-8 with schema version 2, conditional BACKUP retention, strict codec validation, interactive confirmation, and atomic persistence.
+Added configuration tests for version compatibility, invalid schemas, retention boundaries, cancellation, and exact persisted JSON; `go test ./...` passes.
