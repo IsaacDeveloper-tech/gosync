@@ -263,6 +263,22 @@ func ValidateBackupRootPaths(sourceRoot, destinationRoot, configurationPath stri
 	return validateBackupRootPaths(sourceRoot, destinationRoot, configurationPath)
 }
 
+func ValidateBackupSetState(state BackupSetState) error {
+	return validateBackupSetState(state)
+}
+
+func EncodeBackupSetState(state BackupSetState) (string, error) {
+	return encodeBackupSetState(state)
+}
+
+func DecodeBackupSetState(encoded string) (BackupSetState, error) {
+	return decodeBackupSetState(encoded)
+}
+
+func NewBackupSetStoreAt(applicationDataDirectory, destinationRoot string) (BackupSetStore, error) {
+	return newBackupSetStoreAt(applicationDataDirectory, destinationRoot)
+}
+
 func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
 	return validateConfigurationPath(configurationPath, roots)
 }

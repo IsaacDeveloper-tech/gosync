@@ -134,3 +134,6 @@ Added configuration tests for version compatibility, invalid schemas, retention 
 
 Completed compressed-backup Backup Policy And Paths tasks 9-14 with startup policy snapshots, canonical roots, source and destination validation, root overlap guards, and console-only logging overlap handling.
 Added policy/path integration tests for aliases, mutation ordering, unsupported roots, configuration overlap, and logging destination behavior.
+
+Completed compressed-backup Logical Inventory and Backup Set State tasks 15-25 with deterministic source inventories, strict state records, destination-keyed storage, typed load outcomes, and atomic replacement.
+Added tests for unsupported and blocked entries, metadata-independent digests, state schema rejection, destination isolation, storage failures, and cancellation-safe persistence.

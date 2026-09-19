@@ -62,49 +62,49 @@
 
 ## Logical Inventory
 
-- [ ] **15. Define deterministic logical inventory types** (15 min)
+- [x] **15. Define deterministic logical inventory types** (15 min)
   RF: RF-18, RF-19, RF-23, RF-25
   Done when: Tests represent canonical relative paths, file and directory kinds, file-content digests, deterministic ordering, and an empty inventory without metadata fields.
 
-- [ ] **16. Build inventories for regular files and directories** (25 min)
+- [x] **16. Build inventories for regular files and directories** (25 min)
   RF: RF-08, RF-18, RF-19, RF-25
   Done when: Temporary-tree tests inventory nested files, empty directories, and zero-length files with exact relative paths and SHA-256 content digests.
 
-- [ ] **17. Calculate deterministic aggregate inventory digests** (20 min)
+- [x] **17. Calculate deterministic aggregate inventory digests** (20 min)
   RF: RF-17, RF-23, RF-25
   Done when: Tests produce equal aggregate digests for equal logical trees regardless of traversal order and different digests after any name, type, hierarchy, or content change.
 
-- [ ] **18. Reject unsupported and blocked source entries** (25 min)
+- [x] **18. Reject unsupported and blocked source entries** (25 min)
   RF: RF-08, RF-21, RF-22, RF-24
   Done when: Tests identify symbolic links and available platform special entries, classify lock or sharing violations as blocked, and return explanatory errors without destination changes.
 
-- [ ] **19. Ignore excluded metadata in logical comparisons** (15 min)
+- [x] **19. Ignore excluded metadata in logical comparisons** (15 min)
   RF: RF-19, RF-23
   Done when: Tests keep inventories equivalent after timestamp or permission-only changes while detecting every required logical change.
 
 ## Backup Set State
 
-- [ ] **20. Define backup set and archive record states** (20 min)
+- [x] **20. Define backup set and archive record states** (20 min)
   RF: RF-14, RF-17, RF-26, RF-28 through RF-30
   Done when: Tests represent destination and source identity, next confirmation order, archive and inventory digests, and confirmed or pending-removal records.
 
-- [ ] **21. Resolve destination-keyed state and lock locations** (20 min)
+- [x] **21. Resolve destination-keyed state and lock locations** (20 min)
   RF: RF-10, RF-13, RF-14, RF-34
   Done when: Tests derive stable collision-checked application-data paths from canonical destinations and keep state and lock files outside both backup roots.
 
-- [ ] **22. Encode and decode backup set state strictly** (25 min)
+- [x] **22. Encode and decode backup set state strictly** (25 min)
   RF: RF-14, RF-17, RF-24, RF-26, RF-28 through RF-30
   Done when: Tests round-trip the exact state schema and reject malformed, duplicate, unknown, missing, mis-capitalized, invalid-order, and invalid-lifecycle data.
 
-- [ ] **23. Load typed backup state outcomes** (20 min)
+- [x] **23. Load typed backup state outcomes** (20 min)
   RF: RF-14 through RF-17, RF-24
   Done when: Tests distinguish missing, valid, invalid, unsupported-entry, and inaccessible state without changing application data or the destination.
 
-- [ ] **24. Replace backup set state atomically** (25 min)
+- [x] **24. Replace backup set state atomically** (25 min)
   RF: RF-24, RF-26, RF-28 through RF-30
   Done when: Interruption tests expose either the previous complete state or the new complete state after candidate creation, write, close, and replacement boundaries.
 
-- [ ] **25. Propagate backup state storage failures** (20 min)
+- [x] **25. Propagate backup state storage failures** (20 min)
   RF: RF-24, RF-34
   Done when: Tests return location, inspection, read, serialization, create, write, close, replace, and cleanup errors while preserving the last committed state.
 
