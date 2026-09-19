@@ -80,43 +80,43 @@
   RF: RF-32
   Done when: Tests emit start, success, cancellation, and failure events without including answers, interval, mode, or serialized JSON.
 
-- [ ] **21. Reject configuration paths inside synchronization roots** (20 min)
+- [x] **21. Reject configuration paths inside synchronization roots** (20 min)
   RF: RF-31
   Done when: Canonical-path tests reject config locations equal to or contained in either root and accept paths outside both roots.
 
-- [ ] **22. Start configure when watch has no configuration** (25 min)
+- [x] **22. Start configure when watch has no configuration** (25 min)
   RF: RF-22, RF-23, RF-24, RF-28
   Done when: Tests start configuration only after valid watch arguments and continue toward synchronization only after confirmed persistence.
 
-- [ ] **23. Handle invalid or inaccessible configuration at watch startup** (20 min)
+- [x] **23. Handle invalid or inaccessible configuration at watch startup** (20 min)
   RF: RF-21, RF-25 through RF-27
   Done when: Tests stop watch with explanatory errors for invalid, unreadable, symbolic-link, directory, or special-entry configuration without changing user files.
 
-- [ ] **24. Keep one configuration snapshot per watch process** (20 min)
+- [x] **24. Keep one configuration snapshot per watch process** (20 min)
   RF: RF-09, RF-10, RF-30
   Done when: Tests prove an active watch policy does not change after the stored JSON changes and a new process loads the updated complete snapshot.
 
-- [ ] **25. Select synchronization behavior from the configured mode** (20 min)
+- [x] **25. Select synchronization behavior from the configured mode** (20 min)
   RF: RF-09, RF-10, RF-30
   Done when: Tests route bidirectional snapshots to existing behavior and unidirectional snapshots to source-authoritative behavior without reloading configuration.
 
-- [ ] **26. Replace fixed ticker scheduling with completion-based waiting** (25 min)
+- [x] **26. Replace fixed ticker scheduling with completion-based waiting** (25 min)
   RF: RF-03, RF-29, RF-30
   Done when: Fake-wait tests synchronize immediately, wait the configured duration only after completion, and never overlap synchronization callbacks.
 
-- [ ] **27. Validate unidirectional source and roots** (20 min)
+- [x] **27. Validate unidirectional source and roots** (20 min)
   RF: RF-10, RF-11, RF-15
   Done when: Tests assign the first root as source, reject missing sources and equal or nested roots, and leave the destination unchanged after rejection.
 
-- [ ] **28. Create a missing unidirectional destination** (20 min)
+- [x] **28. Create a missing unidirectional destination** (20 min)
   RF: RF-12, RF-15
   Done when: Temporary-root tests create the destination only after source and preflight validation succeed.
 
-- [ ] **29. Plan unidirectional copies and updates** (25 min)
+- [x] **29. Plan unidirectional copies and updates** (25 min)
   RF: RF-13, RF-14
   Done when: Tests plan destination copies for source-only and differing entries and never plan a destination-to-source action.
 
-- [ ] **30. Plan deletion of destination-only entries** (20 min)
+- [x] **30. Plan deletion of destination-only entries** (20 min)
   RF: RF-13, RF-14
   Done when: Tests plan removal of files and directories absent from the source while leaving the source inventory unchanged.
 

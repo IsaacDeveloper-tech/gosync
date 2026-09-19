@@ -10,6 +10,7 @@ const watchCheckInterval = 5 * time.Second
 type WatchLoopOptions struct {
 	Interval time.Duration
 	Stop     <-chan struct{}
+	Wait     func(time.Duration)
 }
 
 func runWatchLoop(synchronize func() error, options WatchLoopOptions) error {
@@ -25,17 +26,33 @@ func runWatchLoop(synchronize func() error, options WatchLoopOptions) error {
 	if interval <= 0 {
 		interval = watchCheckInterval
 	}
-	ticker := time.NewTicker(interval)
-	defer ticker.Stop()
-
 	for {
 		select {
-		case <-ticker.C:
-			if err := synchronize(); err != nil {
-				return err
-			}
 		case <-options.Stop:
 			return nil
+		default:
+		}
+
+		if options.Wait != nil {
+			options.Wait(interval)
+		} else {
+			timer := time.NewTimer(interval)
+			select {
+			case <-timer.C:
+			case <-options.Stop:
+				if !timer.Stop() {
+					<-timer.C
+				}
+				return nil
+			}
+		}
+		select {
+		case <-options.Stop:
+			return nil
+		default:
+		}
+		if err := synchronize(); err != nil {
+			return err
 		}
 	}
 }

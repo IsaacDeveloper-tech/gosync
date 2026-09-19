@@ -110,3 +110,6 @@ Added tests for valid drafts, confirmation behavior, per-user config location, e
 
 Completed configuration system tasks 11-20 with filesystem inspection, typed load outcomes, atomic storage, ownership, configure orchestration, recovery, cancellation, and lifecycle logging.
 Added tests for unsupported entries, storage preservation, exclusive ownership, invalid-JSON repair, cancellation, and sanitized configuration events.
+
+Completed configuration system tasks 21-30 with configuration-root guarding, watch startup snapshots, mode routing, completion-based scheduling, and unidirectional planning.
+Added tests for first-run configure, invalid startup configuration, immutable snapshots, source validation, destination creation, copies, updates, and deletions.

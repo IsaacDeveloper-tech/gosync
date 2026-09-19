@@ -137,3 +137,7 @@ var loadConfiguration = gosync.LoadConfiguration
 var newConfigurationStore = gosync.NewConfigurationStore
 var acquireConfigurationOwnership = gosync.AcquireConfigurationOwnership
 var newConfigurationService = gosync.NewConfigurationService
+var validateConfigurationPath = gosync.ValidateConfigurationPath
+var validateUnidirectionalRoots = gosync.ValidateUnidirectionalRoots
+var synchronizeUnidirectional = gosync.SynchronizeUnidirectional
+var generateUnidirectionalSynchronizationPlan = gosync.GenerateUnidirectionalSynchronizationPlan

@@ -230,3 +230,19 @@ func AcquireConfigurationOwnership(configurationPath string) (ConfigurationOwner
 func NewConfigurationService(options ConfigurationServiceOptions) *ConfigurationService {
 	return newConfigurationService(options)
 }
+
+func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
+	return validateConfigurationPath(configurationPath, roots)
+}
+
+func ValidateUnidirectionalRoots(roots RootPaths) error {
+	return validateUnidirectionalRoots(roots)
+}
+
+func SynchronizeUnidirectional(roots RootPaths, store ConfirmedStateStore, options SynchronizationExecutionOptions) error {
+	return synchronizeUnidirectional(roots, store, options)
+}
+
+func GenerateUnidirectionalSynchronizationPlan(comparisons []EntryComparison) (SynchronizationPlan, error) {
+	return generateUnidirectionalSynchronizationPlan(comparisons)
+}

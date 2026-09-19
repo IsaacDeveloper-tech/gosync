@@ -11,14 +11,17 @@ import (
 )
 
 type WatchCommandOptions struct {
-	Input       io.Reader
-	Output      io.Writer
-	Interval    time.Duration
-	Stop        <-chan struct{}
-	StateStore  *ConfirmedStateStore
-	Synchronize func(RootPaths) error
-	Logger      *LoggingCoordinator
-	Logging     LoggingCoordinatorOptions
+	Input                        io.Reader
+	Output                       io.Writer
+	Interval                     time.Duration
+	Stop                         <-chan struct{}
+	StateStore                   *ConfirmedStateStore
+	Synchronize                  func(RootPaths) error
+	Logger                       *LoggingCoordinator
+	Logging                      LoggingCoordinatorOptions
+	ConfigurationStore           *ConfigurationStore
+	SynchronizeWithConfiguration func(RootPaths, ConfigurationSnapshot) error
+	Wait                         func(time.Duration)
 }
 
 func runWatchCommand(arguments []string, options WatchCommandOptions) error {
@@ -49,6 +52,18 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		}
 		store = &defaultStore
 	}
+	configurationStore := options.ConfigurationStore
+	if configurationStore == nil {
+		configurationPath, err := resolveConfigurationFilePath()
+		if err != nil {
+			return err
+		}
+		defaultConfigurationStore := newConfigurationStore(configurationPath)
+		configurationStore = &defaultConfigurationStore
+	}
+	if err := validateConfigurationPath(configurationStore.Path(), roots); err != nil {
+		return err
+	}
 	logger := options.Logger
 	if logger == nil {
 		loggingOptions := options.Logging
@@ -60,10 +75,54 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 			return err
 		}
 	}
+	configurationResult, configurationErr := configurationStore.Load()
+	var configuration ConfigurationSnapshot
+	if configurationErr != nil {
+		return fmt.Errorf("invalid configuration: %w", configurationErr)
+	}
+	if configurationResult.Status == ConfigurationLoadMissing {
+		configurationService := newConfigurationService(ConfigurationServiceOptions{
+			Store:  *configurationStore,
+			Input:  input,
+			Output: output,
+			Logger: logger,
+		})
+		configuration, err = configurationService.Configure()
+		if err != nil {
+			return err
+		}
+	} else if configurationResult.Status == ConfigurationLoadValid {
+		configuration = configurationResult.Configuration
+	} else {
+		return fmt.Errorf("configuration cannot start watch from status %q", configurationResult.Status)
+	}
+
+	synchronize := options.SynchronizeWithConfiguration
+	if synchronize == nil {
+		switch configuration.SynchronizationMode {
+		case SynchronizationModeBidirectional:
+			synchronize = func(roots RootPaths, _ ConfigurationSnapshot) error {
+				return synchronizeDirectoriesWithLogger(roots, *store, input, output, logger)
+			}
+		case SynchronizationModeUnidirectional:
+			synchronize = func(roots RootPaths, _ ConfigurationSnapshot) error {
+				return synchronizeUnidirectional(roots, *store, SynchronizationExecutionOptions{
+					Notify: func(message string) { _, _ = fmt.Fprintln(output, message) },
+					Logger: logger,
+				})
+			}
+		default:
+			return fmt.Errorf("unsupported synchronization mode %q", configuration.SynchronizationMode)
+		}
+	}
 
 	return runWatchLoop(func() error {
-		return synchronizeDirectoriesWithLogger(roots, *store, input, output, logger)
-	}, WatchLoopOptions{Interval: options.Interval, Stop: options.Stop})
+		return synchronize(roots, configuration)
+	}, WatchLoopOptions{
+		Interval: time.Duration(configuration.SynchronizationIntervalSeconds) * time.Second,
+		Stop:     options.Stop,
+		Wait:     options.Wait,
+	})
 }
 
 func synchronizeDirectories(roots RootPaths, store confirmedStateStore, input io.Reader, output io.Writer) error {
