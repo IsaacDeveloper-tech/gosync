@@ -36,27 +36,27 @@
 
 ## Backup Policy And Paths
 
-- [ ] **9. Route BACKUP from the startup configuration snapshot** (20 min)
+- [x] **9. Route BACKUP from the startup configuration snapshot** (20 min)
   RF: RF-05 through RF-07, RF-32
   Done when: Policy tests route `backup` to a snapshot containing source, destination, interval, and retention without changing bidirectional or unidirectional routing.
 
-- [ ] **10. Derive canonical backup root identities** (25 min)
+- [x] **10. Derive canonical backup root identities** (25 min)
   RF: RF-07, RF-10, RF-14
   Done when: Tests assign the first root as source, the second as destination, resolve path aliases, and produce stable absolute canonical identities.
 
-- [ ] **11. Validate the source before destination access** (20 min)
+- [x] **11. Validate the source before destination access** (20 min)
   RF: RF-08, RF-20, RF-24
   Done when: Tests reject missing, non-directory, unreadable, or uninspectable sources before invoking any destination mutation.
 
-- [ ] **12. Validate existing destination entry types** (20 min)
+- [x] **12. Validate existing destination entry types** (20 min)
   RF: RF-09, RF-12, RF-24
   Done when: Tests distinguish a missing or regular-directory destination and reject files, symbolic links, special entries, and inspection failures unchanged.
 
-- [ ] **13. Reject unsafe root and configuration overlap** (20 min)
+- [x] **13. Reject unsafe root and configuration overlap** (20 min)
   RF: RF-10
   Done when: Canonical-path tests reject equal roots, nesting in both directions, and configuration locations equal to or contained within either root before mutation.
 
-- [ ] **14. Apply console-only logging for backup-root overlap** (20 min)
+- [x] **14. Apply console-only logging for backup-root overlap** (20 min)
   RF: RF-11, RF-34
   Done when: Tests warn and disable persistent logging when its location is inside either root while retaining existing one-destination and no-destination failure behavior.
 

@@ -131,3 +131,6 @@ Sequenced configuration, paths, inventory, state, archive identity, ownership, Z
 
 Completed compressed-backup Configuration Foundation tasks 1-8 with schema version 2, conditional BACKUP retention, strict codec validation, interactive confirmation, and atomic persistence.
 Added configuration tests for version compatibility, invalid schemas, retention boundaries, cancellation, and exact persisted JSON; `go test ./...` passes.
+
+Completed compressed-backup Backup Policy And Paths tasks 9-14 with startup policy snapshots, canonical roots, source and destination validation, root overlap guards, and console-only logging overlap handling.
+Added policy/path integration tests for aliases, mutation ordering, unsupported roots, configuration overlap, and logging destination behavior.

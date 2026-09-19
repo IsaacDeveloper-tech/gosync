@@ -41,6 +41,9 @@ type ConfigurationOwnership = gosync.ConfigurationOwnership
 type ConfigurationService = gosync.ConfigurationService
 type ConfigurationServiceOptions = gosync.ConfigurationServiceOptions
 type ConfigureCommandOptions = gosync.ConfigureCommandOptions
+type BackupRootPaths = gosync.BackupRootPaths
+type BackupPolicySnapshot = gosync.BackupPolicySnapshot
+type BackupDestinationStatus = gosync.BackupDestinationStatus
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -82,6 +85,8 @@ const (
 	ConfigurationLoadInvalid              = gosync.ConfigurationLoadInvalid
 	ConfigurationLoadUnsupported          = gosync.ConfigurationLoadUnsupported
 	ConfigurationLoadIOFailure            = gosync.ConfigurationLoadIOFailure
+	BackupDestinationMissing              = gosync.BackupDestinationMissing
+	BackupDestinationDirectory            = gosync.BackupDestinationDirectory
 	LogEventConfigurationStarted          = gosync.LogEventConfigurationStarted
 	LogEventConfigurationSucceeded        = gosync.LogEventConfigurationSucceeded
 	LogEventConfigurationCancelled        = gosync.LogEventConfigurationCancelled
@@ -145,6 +150,11 @@ var acquireConfigurationOwnership = gosync.AcquireConfigurationOwnership
 var newConfigurationService = gosync.NewConfigurationService
 var runConfigureCommand = gosync.RunConfigureCommand
 var validateConfigurationPath = gosync.ValidateConfigurationPath
+var buildBackupPolicySnapshot = gosync.BuildBackupPolicySnapshot
+var deriveBackupRootPaths = gosync.DeriveBackupRootPaths
+var validateBackupSource = gosync.ValidateBackupSource
+var inspectBackupDestination = gosync.InspectBackupDestination
+var validateBackupRootPaths = gosync.ValidateBackupRootPaths
 var validateUnidirectionalRoots = gosync.ValidateUnidirectionalRoots
 var synchronizeUnidirectional = gosync.SynchronizeUnidirectional
 var generateUnidirectionalSynchronizationPlan = gosync.GenerateUnidirectionalSynchronizationPlan

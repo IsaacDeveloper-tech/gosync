@@ -243,6 +243,26 @@ func RunConfigureCommand(arguments []string, options ConfigureCommandOptions) er
 	return runConfigureCommand(arguments, options)
 }
 
+func BuildBackupPolicySnapshot(roots RootPaths, configuration ConfigurationSnapshot) (BackupPolicySnapshot, error) {
+	return buildBackupPolicySnapshot(roots, configuration)
+}
+
+func DeriveBackupRootPaths(sourceRoot, destinationRoot string) (BackupRootPaths, error) {
+	return deriveBackupRootPaths(sourceRoot, destinationRoot)
+}
+
+func ValidateBackupSource(sourceRoot string) error {
+	return validateBackupSource(sourceRoot)
+}
+
+func InspectBackupDestination(destinationRoot string) (BackupDestinationStatus, error) {
+	return inspectBackupDestination(destinationRoot)
+}
+
+func ValidateBackupRootPaths(sourceRoot, destinationRoot, configurationPath string) (BackupRootPaths, error) {
+	return validateBackupRootPaths(sourceRoot, destinationRoot, configurationPath)
+}
+
 func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
 	return validateConfigurationPath(configurationPath, roots)
 }
