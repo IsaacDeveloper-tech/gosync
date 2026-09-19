@@ -71,6 +71,14 @@ func logEventName(event LogEvent) string {
 		return "persistent_destination_failure"
 	case LogEventConsoleDestinationFailure:
 		return "console_destination_failure"
+	case LogEventConfigurationStarted:
+		return "configuration_started"
+	case LogEventConfigurationSucceeded:
+		return "configuration_succeeded"
+	case LogEventConfigurationCancelled:
+		return "configuration_cancelled"
+	case LogEventConfigurationFailed:
+		return "configuration_failed"
 	default:
 		return "unknown_event"
 	}

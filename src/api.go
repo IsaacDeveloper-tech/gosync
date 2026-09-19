@@ -210,3 +210,23 @@ func EncodeConfiguration(configuration ConfigurationSnapshot) (string, error) {
 func DecodeConfiguration(encodedConfiguration string) (ConfigurationSnapshot, error) {
 	return decodeConfiguration(encodedConfiguration)
 }
+
+func InspectConfigurationFile(path string) (ConfigurationFileStatus, error) {
+	return inspectConfigurationFile(path)
+}
+
+func LoadConfiguration(path string) (ConfigurationLoadResult, error) {
+	return loadConfiguration(path)
+}
+
+func NewConfigurationStore(path string) ConfigurationStore {
+	return newConfigurationStore(path)
+}
+
+func AcquireConfigurationOwnership(configurationPath string) (ConfigurationOwnership, error) {
+	return acquireConfigurationOwnership(configurationPath)
+}
+
+func NewConfigurationService(options ConfigurationServiceOptions) *ConfigurationService {
+	return newConfigurationService(options)
+}

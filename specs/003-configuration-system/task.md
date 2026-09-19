@@ -40,43 +40,43 @@
   RF: RF-19
   Done when: Table-driven tests reject malformed or trailing JSON, duplicate, unknown or missing properties, wrong capitalization or types, unsupported versions or modes, and invalid intervals.
 
-- [ ] **11. Inspect the configuration filesystem entry** (20 min)
+- [x] **11. Inspect the configuration filesystem entry** (20 min)
   RF: RF-22, RF-26, RF-27
   Done when: Tests distinguish a missing path and regular file and reject symbolic links, directories, special entries, and inspection failures.
 
-- [ ] **12. Load typed configuration outcomes** (25 min)
+- [x] **12. Load typed configuration outcomes** (25 min)
   RF: RF-19, RF-21, RF-22, RF-25 through RF-27
   Done when: Tests return distinct valid, missing, invalid, unsupported-entry, and I/O-failure outcomes without modifying `config.json`.
 
-- [ ] **13. Write and close a complete candidate document** (25 min)
+- [x] **13. Write and close a complete candidate document** (25 min)
   RF: RF-18, RF-20, RF-21
   Done when: Temporary-directory tests produce a fully encoded and closed candidate while candidate creation, write, and close failures leave the active JSON unchanged.
 
-- [ ] **14. Replace config.json atomically** (25 min)
+- [x] **14. Replace config.json atomically** (25 min)
   RF: RF-20, RF-21
   Done when: Tests show successful replacement exposes the complete new JSON and each simulated interruption exposes either the complete previous or complete new JSON, never partial data.
 
-- [ ] **15. Propagate configuration storage failures** (20 min)
+- [x] **15. Propagate configuration storage failures** (20 min)
   RF: RF-21, RF-26
   Done when: Tests return explanatory location, read, serialization, create, write, replace, and close errors while preserving the last complete valid configuration.
 
-- [ ] **16. Add exclusive configure ownership** (25 min)
+- [x] **16. Add exclusive configure ownership** (25 min)
   RF: RF-28
   Done when: Tests allow one configuration owner, reject a concurrent owner without storage changes, and release ownership after success, cancellation, or failure.
 
-- [ ] **17. Orchestrate a successful direct configure flow** (25 min)
+- [x] **17. Orchestrate a successful direct configure flow** (25 min)
   RF: RF-01, RF-03 through RF-08, RF-18, RF-20, RF-21, RF-28
   Done when: A service test acquires ownership, collects and confirms valid answers, stores the exact complete JSON, and reports success.
 
-- [ ] **18. Allow configure to repair invalid JSON** (20 min)
+- [x] **18. Allow configure to repair invalid JSON** (20 min)
   RF: RF-19, RF-25
   Done when: Tests report existing invalid JSON and replace it only after a new valid interactive session is explicitly confirmed.
 
-- [ ] **19. Preserve configuration on cancelled configure** (20 min)
+- [x] **19. Preserve configuration on cancelled configure** (20 min)
   RF: RF-08, RF-20, RF-21
   Done when: Tests prove rejection, absent input, interruption, and input errors leave the previous complete JSON unchanged.
 
-- [ ] **20. Log configuration lifecycle outcomes** (20 min)
+- [x] **20. Log configuration lifecycle outcomes** (20 min)
   RF: RF-32
   Done when: Tests emit start, success, cancellation, and failure events without including answers, interval, mode, or serialized JSON.
 

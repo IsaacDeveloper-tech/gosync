@@ -33,6 +33,13 @@ type LoggingCoordinatorOptions = gosync.LoggingCoordinatorOptions
 type ConfigurationSnapshot = gosync.ConfigurationSnapshot
 type ConfigurationDraft = gosync.ConfigurationDraft
 type SynchronizationMode = gosync.SynchronizationMode
+type ConfigurationFileStatus = gosync.ConfigurationFileStatus
+type ConfigurationLoadStatus = gosync.ConfigurationLoadStatus
+type ConfigurationLoadResult = gosync.ConfigurationLoadResult
+type ConfigurationStore = gosync.ConfigurationStore
+type ConfigurationOwnership = gosync.ConfigurationOwnership
+type ConfigurationService = gosync.ConfigurationService
+type ConfigurationServiceOptions = gosync.ConfigurationServiceOptions
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -64,11 +71,23 @@ const (
 	SynchronizationModeBidirectional      = gosync.SynchronizationModeBidirectional
 	SynchronizationModeUnidirectional     = gosync.SynchronizationModeUnidirectional
 	SynchronizationModeBackup             = gosync.SynchronizationModeBackup
+	ConfigurationFileMissing              = gosync.ConfigurationFileMissing
+	ConfigurationFileRegular              = gosync.ConfigurationFileRegular
+	ConfigurationLoadMissing              = gosync.ConfigurationLoadMissing
+	ConfigurationLoadValid                = gosync.ConfigurationLoadValid
+	ConfigurationLoadInvalid              = gosync.ConfigurationLoadInvalid
+	ConfigurationLoadUnsupported          = gosync.ConfigurationLoadUnsupported
+	ConfigurationLoadIOFailure            = gosync.ConfigurationLoadIOFailure
+	LogEventConfigurationStarted          = gosync.LogEventConfigurationStarted
+	LogEventConfigurationSucceeded        = gosync.LogEventConfigurationSucceeded
+	LogEventConfigurationCancelled        = gosync.LogEventConfigurationCancelled
+	LogEventConfigurationFailed           = gosync.LogEventConfigurationFailed
 )
 
 var errSynchronizationIncomplete = gosync.ErrSynchronizationIncomplete
 var errLoggingUnavailable = gosync.ErrLoggingUnavailable
 var errConfigurationCancelled = gosync.ErrConfigurationCancelled
+var errConfigurationInUse = gosync.ErrConfigurationInUse
 
 var newConfirmedStateStore = gosync.NewConfirmedStateStore
 var newConfirmedStateStoreAt = gosync.NewConfirmedStateStoreAt
@@ -113,3 +132,8 @@ var runInteractiveConfiguration = gosync.RunInteractiveConfiguration
 var resolveConfigurationFilePath = gosync.ResolveConfigurationFilePath
 var encodeConfiguration = gosync.EncodeConfiguration
 var decodeConfiguration = gosync.DecodeConfiguration
+var inspectConfigurationFile = gosync.InspectConfigurationFile
+var loadConfiguration = gosync.LoadConfiguration
+var newConfigurationStore = gosync.NewConfigurationStore
+var acquireConfigurationOwnership = gosync.AcquireConfigurationOwnership
+var newConfigurationService = gosync.NewConfigurationService

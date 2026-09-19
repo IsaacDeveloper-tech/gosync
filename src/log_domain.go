@@ -22,4 +22,8 @@ const (
 	LogEventOperationFailed
 	LogEventPersistentDestinationFailure
 	LogEventConsoleDestinationFailure
+	LogEventConfigurationStarted
+	LogEventConfigurationSucceeded
+	LogEventConfigurationCancelled
+	LogEventConfigurationFailed
 )
