@@ -8,7 +8,14 @@ import (
 )
 
 func main() {
-	if err := gosync.RunWatchCommand(os.Args[1:], gosync.WatchCommandOptions{}); err != nil {
+	arguments := os.Args[1:]
+	var err error
+	if len(arguments) > 0 && arguments[0] == "configure" {
+		err = gosync.RunConfigureCommand(arguments, gosync.ConfigureCommandOptions{})
+	} else {
+		err = gosync.RunWatchCommand(arguments, gosync.WatchCommandOptions{})
+	}
+	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

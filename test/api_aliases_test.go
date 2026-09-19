@@ -40,6 +40,7 @@ type ConfigurationStore = gosync.ConfigurationStore
 type ConfigurationOwnership = gosync.ConfigurationOwnership
 type ConfigurationService = gosync.ConfigurationService
 type ConfigurationServiceOptions = gosync.ConfigurationServiceOptions
+type ConfigureCommandOptions = gosync.ConfigureCommandOptions
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -137,6 +138,7 @@ var loadConfiguration = gosync.LoadConfiguration
 var newConfigurationStore = gosync.NewConfigurationStore
 var acquireConfigurationOwnership = gosync.AcquireConfigurationOwnership
 var newConfigurationService = gosync.NewConfigurationService
+var runConfigureCommand = gosync.RunConfigureCommand
 var validateConfigurationPath = gosync.ValidateConfigurationPath
 var validateUnidirectionalRoots = gosync.ValidateUnidirectionalRoots
 var synchronizeUnidirectional = gosync.SynchronizeUnidirectional

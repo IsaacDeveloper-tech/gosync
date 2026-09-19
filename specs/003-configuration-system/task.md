@@ -120,46 +120,46 @@
   RF: RF-13, RF-14
   Done when: Tests plan removal of files and directories absent from the source while leaving the source inventory unchanged.
 
-- [ ] **31. Resolve unidirectional conflicts to the source** (25 min)
+- [x] **31. Resolve unidirectional conflicts to the source** (25 min)
   RF: RF-13, RF-14, RF-16
   Done when: Tests choose source content and type for file-content and file-directory conflicts without requesting user decisions.
 
-- [ ] **32. Reuse preflight and filesystem error protections** (25 min)
+- [x] **32. Reuse preflight and filesystem error protections** (25 min)
   RF: RF-11, RF-12, RF-15
   Done when: Tests reject unsupported entries before mutation and propagate non-lock filesystem errors without modifying the source.
 
-- [ ] **33. Reuse locked-file retry behavior** (20 min)
+- [x] **33. Reuse locked-file retry behavior** (20 min)
   RF: RF-15
   Done when: Tests verify locked destination actions notify, retry until available, and complete without weakening source authority.
 
-- [ ] **34. Verify unidirectional results and confirmed state** (25 min)
+- [x] **34. Verify unidirectional results and confirmed state** (25 min)
   RF: RF-13, RF-17
   Done when: Tests commit confirmed state only after exact source-destination equivalence and preserve the previous state after any failed cycle.
 
-- [ ] **35. Connect configured policy to watch orchestration** (25 min)
+- [x] **35. Connect configured policy to watch orchestration** (25 min)
   RF: RF-09 through RF-17, RF-22 through RF-24, RF-29 through RF-31
   Done when: An orchestration test runs startup validation, one configuration snapshot, selected synchronization mode, final verification, and completion-based waiting in the required order.
 
-- [ ] **36. Add configuration filesystem integration coverage** (25 min)
+- [x] **36. Add configuration filesystem integration coverage** (25 min)
   RF: RF-18 through RF-21, RF-25 through RF-28
   Done when: Temporary application-data tests verify strict loading, complete replacement, invalid-file recovery, entry-type rejection, failure preservation, and exclusive ownership.
 
-- [ ] **37. Add configure CLI integration coverage** (25 min)
+- [x] **37. Add configure CLI integration coverage** (25 min)
   RF: RF-01 through RF-08, RF-18, RF-20, RF-21, RF-25, RF-28, RF-32
   Done when: CLI tests cover valid configuration, repeated invalid answers, BACKUP rejection, confirmation, cancellation, repair, competing sessions, and sanitized lifecycle logs.
 
-- [ ] **38. Add watch configuration startup integration coverage** (25 min)
+- [x] **38. Add watch configuration startup integration coverage** (25 min)
   RF: RF-22 through RF-27, RF-30, RF-31
   Done when: Tests cover invalid arguments, first-run configuration, invalid or inaccessible JSON, unsupported entries, immutable startup snapshots, and root overlap.
 
-- [ ] **39. Add unidirectional filesystem integration coverage** (25 min)
+- [x] **39. Add unidirectional filesystem integration coverage** (25 min)
   RF: RF-10 through RF-17
   Done when: Temporary-root tests cover missing roots, exact mirroring, additions, changes, deletions, type conflicts, source preservation, retries, failures, verification, and confirmed state.
 
-- [ ] **40. Add configured scheduler integration coverage** (20 min)
+- [x] **40. Add configured scheduler integration coverage** (20 min)
   RF: RF-03, RF-09, RF-29, RF-30
   Done when: Tests prove both modes run immediately, wait after completion using the startup interval, avoid overlap, and apply changed settings only on a new run.
 
-- [ ] **41. Run the complete project test suite** (10 min)
+- [x] **41. Run the complete project test suite** (10 min)
   RF: RF-01 through RF-32
   Done when: `go test ./...` passes with automated coverage for every configuration-system requirement and defined error behavior.

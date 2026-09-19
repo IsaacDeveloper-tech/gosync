@@ -113,3 +113,6 @@ Added tests for unsupported entries, storage preservation, exclusive ownership, 
 
 Completed configuration system tasks 21-30 with configuration-root guarding, watch startup snapshots, mode routing, completion-based scheduling, and unidirectional planning.
 Added tests for first-run configure, invalid startup configuration, immutable snapshots, source validation, destination creation, copies, updates, and deletions.
+
+Completed configuration system tasks 31-41 with source-authoritative conflicts, safety and retry reuse, confirmed-state verification, CLI/watch orchestration, and integration coverage.
+Added tests for exact mirroring, source preservation, failure recovery, configured scheduling, startup guards, and the complete project suite.

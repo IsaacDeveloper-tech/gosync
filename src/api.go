@@ -231,6 +231,10 @@ func NewConfigurationService(options ConfigurationServiceOptions) *Configuration
 	return newConfigurationService(options)
 }
 
+func RunConfigureCommand(arguments []string, options ConfigureCommandOptions) error {
+	return runConfigureCommand(arguments, options)
+}
+
 func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
 	return validateConfigurationPath(configurationPath, roots)
 }
