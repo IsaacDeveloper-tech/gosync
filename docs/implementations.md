@@ -137,3 +137,6 @@ Added policy/path integration tests for aliases, mutation ordering, unsupported 
 
 Completed compressed-backup Logical Inventory and Backup Set State tasks 15-25 with deterministic source inventories, strict state records, destination-keyed storage, typed load outcomes, and atomic replacement.
 Added tests for unsupported and blocked entries, metadata-independent digests, state schema rejection, destination isolation, storage failures, and cancellation-safe persistence.
+
+Completed compressed-backup Archive Identity, Destination Ownership, and ZIP Verification tasks 26-38 with strict ZIP metadata, canonical destination locks, deterministic naming, DEFLATE archives, and integrity verification.
+Added tests for identity mismatches, concurrent ownership, empty and structured archives, unsafe entries, CRC failures, inventory mismatches, and whole-archive digest changes.

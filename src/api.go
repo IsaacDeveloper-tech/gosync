@@ -279,6 +279,42 @@ func NewBackupSetStoreAt(applicationDataDirectory, destinationRoot string) (Back
 	return newBackupSetStoreAt(applicationDataDirectory, destinationRoot)
 }
 
+func EncodeBackupArchiveIdentity(identity BackupArchiveIdentity) (string, error) {
+	return encodeBackupArchiveIdentity(identity)
+}
+
+func DecodeBackupArchiveIdentity(encoded string) (BackupArchiveIdentity, error) {
+	return decodeBackupArchiveIdentity(encoded)
+}
+
+func ValidateBackupArchiveIdentity(identity BackupArchiveIdentity, expectedSource, expectedDestination string, expectedOrder uint64, expectedInventoryDigest string) error {
+	return validateBackupArchiveIdentity(identity, expectedSource, expectedDestination, expectedOrder, expectedInventoryDigest)
+}
+
+func GenerateBackupArchiveName(clock func() time.Time, archiveID string) (string, error) {
+	return generateBackupArchiveName(clock, archiveID)
+}
+
+func AcquireBackupDestinationOwnership(lockPath string) (BackupDestinationOwnership, error) {
+	return acquireBackupDestinationOwnership(lockPath)
+}
+
+func WriteBackupArchive(path string, sourceRoot string, inventory BackupLogicalInventory, identity BackupArchiveIdentity) error {
+	return writeBackupArchive(path, sourceRoot, inventory, identity)
+}
+
+func VerifyBackupArchive(archivePath string, expectedIdentity BackupArchiveIdentity, expectedInventory BackupLogicalInventory) error {
+	return verifyBackupArchive(archivePath, expectedIdentity, expectedInventory)
+}
+
+func CalculateBackupArchiveDigest(archivePath string) (string, error) {
+	return calculateBackupArchiveDigest(archivePath)
+}
+
+func VerifyBackupArchiveDigest(archivePath, expectedDigest string) error {
+	return verifyBackupArchiveDigest(archivePath, expectedDigest)
+}
+
 func ValidateConfigurationPath(configurationPath string, roots RootPaths) error {
 	return validateConfigurationPath(configurationPath, roots)
 }

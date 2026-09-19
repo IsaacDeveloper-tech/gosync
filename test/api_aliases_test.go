@@ -53,6 +53,8 @@ type BackupRemovalState = gosync.BackupRemovalState
 type BackupSetStore = gosync.BackupSetStore
 type BackupSetLoadStatus = gosync.BackupSetLoadStatus
 type BackupSetLoadResult = gosync.BackupSetLoadResult
+type BackupArchiveIdentity = gosync.BackupArchiveIdentity
+type BackupDestinationOwnership = gosync.BackupDestinationOwnership
 
 const (
 	EntryKindFile                         = gosync.EntryKindFile
@@ -108,6 +110,7 @@ const (
 	BackupSetLoadInvalid                  = gosync.BackupSetLoadInvalid
 	BackupSetLoadUnsupported              = gosync.BackupSetLoadUnsupported
 	BackupSetLoadIOFailure                = gosync.BackupSetLoadIOFailure
+	BackupArchiveIdentitySchemaVersion    = gosync.BackupArchiveIdentitySchemaVersion
 	LogEventConfigurationStarted          = gosync.LogEventConfigurationStarted
 	LogEventConfigurationSucceeded        = gosync.LogEventConfigurationSucceeded
 	LogEventConfigurationCancelled        = gosync.LogEventConfigurationCancelled
@@ -183,6 +186,15 @@ var validateBackupSetState = gosync.ValidateBackupSetState
 var encodeBackupSetState = gosync.EncodeBackupSetState
 var decodeBackupSetState = gosync.DecodeBackupSetState
 var newBackupSetStoreAt = gosync.NewBackupSetStoreAt
+var encodeBackupArchiveIdentity = gosync.EncodeBackupArchiveIdentity
+var decodeBackupArchiveIdentity = gosync.DecodeBackupArchiveIdentity
+var validateBackupArchiveIdentity = gosync.ValidateBackupArchiveIdentity
+var generateBackupArchiveName = gosync.GenerateBackupArchiveName
+var acquireBackupDestinationOwnership = gosync.AcquireBackupDestinationOwnership
+var writeBackupArchive = gosync.WriteBackupArchive
+var verifyBackupArchive = gosync.VerifyBackupArchive
+var calculateBackupArchiveDigest = gosync.CalculateBackupArchiveDigest
+var verifyBackupArchiveDigest = gosync.VerifyBackupArchiveDigest
 var validateUnidirectionalRoots = gosync.ValidateUnidirectionalRoots
 var synchronizeUnidirectional = gosync.SynchronizeUnidirectional
 var generateUnidirectionalSynchronizationPlan = gosync.GenerateUnidirectionalSynchronizationPlan

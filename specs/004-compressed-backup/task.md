@@ -110,59 +110,59 @@
 
 ## Archive Identity And Naming
 
-- [ ] **26. Encode strict ZIP-level archive identity** (25 min)
+- [x] **26. Encode strict ZIP-level archive identity** (25 min)
   RF: RF-14 through RF-17, RF-26 through RF-28
   Done when: Tests round-trip one exact identity containing schema, archive ID, canonical roots, UTC time, confirmation order, and inventory digest without creating a source-tree entry.
 
-- [ ] **27. Reject foreign or invalid archive identity** (20 min)
+- [x] **27. Reject foreign or invalid archive identity** (20 min)
   RF: RF-14 through RF-17, RF-26
   Done when: Tests reject malformed, duplicate, missing, unsupported, wrong-source, wrong-destination, wrong-order, and mismatched-inventory identity values.
 
-- [ ] **28. Generate unique UTC archive names** (20 min)
+- [x] **28. Generate unique UTC archive names** (20 min)
   RF: RF-27
   Done when: Injected-clock and identifier tests produce readable `.zip` names with UTC date and time and no collisions when the clock repeats.
 
 ## Destination Ownership
 
-- [ ] **29. Define destination ownership locking contract** (15 min)
+- [x] **29. Define destination ownership locking contract** (15 min)
   RF: RF-13, RF-22, RF-24
   Done when: Contract tests acquire one canonical-destination owner, reject a second owner, release safely, and expose acquisition and release errors.
 
-- [ ] **30. Add native Windows destination locking** (25 min)
+- [x] **30. Add native Windows destination locking** (25 min)
   RF: RF-13, RF-22, RF-24
   Done when: Windows tests hold an OS-backed lock across handles, reject another process, and permit reacquisition after release or owner termination.
 
-- [ ] **31. Add native non-Windows destination locking** (25 min)
+- [x] **31. Add native non-Windows destination locking** (25 min)
   RF: RF-13, RF-22, RF-24
   Done when: Non-Windows contract tests provide the same acquisition, exclusion, automatic process-release, and error semantics behind build-tagged code.
 
-- [ ] **32. Key ownership by canonical destination aliases** (20 min)
+- [x] **32. Key ownership by canonical destination aliases** (20 min)
   RF: RF-13, RF-14
   Done when: Tests prove path aliases contend for the same lock while distinct canonical destinations can be owned independently.
 
 ## ZIP Creation And Verification
 
-- [ ] **33. Write valid empty ZIPs and directory entries** (20 min)
+- [x] **33. Write valid empty ZIPs and directory entries** (20 min)
   RF: RF-18, RF-19
   Done when: Tests open a valid empty-source ZIP and find explicit sorted entries for nested and empty directories in non-empty sources.
 
-- [ ] **34. Write DEFLATE-compressed regular files** (25 min)
+- [x] **34. Write DEFLATE-compressed regular files** (25 min)
   RF: RF-18, RF-19, RF-21
   Done when: Tests read exact regular and zero-length file contents from safe relative entries and verify regular payloads use ZIP DEFLATE.
 
-- [ ] **35. Propagate ZIP creation and close failures** (20 min)
+- [x] **35. Propagate ZIP creation and close failures** (20 min)
   RF: RF-22, RF-24
   Done when: Injected create, header, read, copy, write, and close failures return their cause and never expose a confirmed archive.
 
-- [ ] **36. Reject unsafe or ambiguous ZIP structures** (25 min)
+- [x] **36. Reject unsafe or ambiguous ZIP structures** (25 min)
   RF: RF-17, RF-19, RF-21, RF-25
   Done when: Verifier tests reject absolute paths, parent traversal, backslash ambiguity, duplicate names, unsupported entry kinds, and malformed ZIPs.
 
-- [ ] **37. Verify ZIP checksums and logical inventory** (25 min)
+- [x] **37. Verify ZIP checksums and logical inventory** (25 min)
   RF: RF-17 through RF-19, RF-23, RF-25
   Done when: Tests read every payload, exercise ZIP checksum validation, rebuild the exact logical inventory, and reject any hierarchy or content mismatch.
 
-- [ ] **38. Verify whole-archive integrity digests** (20 min)
+- [x] **38. Verify whole-archive integrity digests** (20 min)
   RF: RF-17, RF-24, RF-25
   Done when: Tests detect changes to payloads, headers, ZIP identity, entry order, trailing bytes, and unreadable confirmed archives against stored SHA-256 digests.
 
