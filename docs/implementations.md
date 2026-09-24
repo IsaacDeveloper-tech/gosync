@@ -146,3 +146,15 @@ Added tests for source binding, damaged history, foreign entries, rollback, rete
 
 Completed compressed-backup Backup Cycle, Watch Orchestration, Integration, and Regression tasks 54-67 with end-to-end ZIP creation, startup ownership, completion-based scheduling, lifecycle logging, and configured CLI integration.
 Added tests for successful and failed cycles, source preservation, real-process locks, retention recovery, logging overlap, and existing-mode regressions; `go test ./...` passes.
+
+Defined specification 005 for FTP/SFTP destinations in unidirectional and BACKUP watch modes, based on eight scope and error-handling decisions.
+Specified exact remote mirroring, interactive credentials, verified SFTP identity, shared backup directories with source-bound managed versions, and failure/retention guarantees.
+
+Refined specification 005 after QA review to resolve scope precedence, remote-path deletion boundaries, mode changes, global backup ownership, and uncertain confirmation.
+Clarified SSH trust, password authentication, unsupported entries, source stability, server capabilities, error propagation, and completion coverage.
+
+Added specification 005's implementation plan with remote protocol boundaries, shared backup ownership and state, verified publication, mirror safeguards, and dependency justification.
+Mapped RF-01 through RF-37 to modules, data models, rejected design alternatives, execution sequences, and isolated FTP/SFTP test coverage.
+
+Added 116 dependency-ordered specification 005 tasks with unchecked boxes, sub-30-minute estimates, RF mappings, and verifiable `Hecho cuando:` outcomes.
+Sequenced CLI and authentication, FTP/SFTP adapters, shared ownership, exact mirroring, ZIP publication and retention, watch integration, and regression tests.
