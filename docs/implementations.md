@@ -158,3 +158,6 @@ Mapped RF-01 through RF-37 to modules, data models, rejected design alternatives
 
 Added 116 dependency-ordered specification 005 tasks with unchecked boxes, sub-30-minute estimates, RF mappings, and verifiable `Hecho cuando:` outcomes.
 Sequenced CLI and authentication, FTP/SFTP adapters, shared ownership, exact mirroring, ZIP publication and retention, watch integration, and regression tests.
+
+Implemented specification 005's command and endpoint foundation with separate local/remote destinations, strict FTP/SFTP URL validation, and mode-aware startup dispatch.
+Added pre-configuration argument rejection, remote source/config/log guards, immutable startup policy snapshots, and endpoint/routing tests; `go test` and `go test ./...` pass.

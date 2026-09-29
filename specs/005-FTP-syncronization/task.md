@@ -4,39 +4,39 @@ Tasks are ordered by dependency, are each estimated below 30 minutes, and remain
 
 ## Command And Endpoint Foundation
 
-- [ ] **1. Represent local and remote watch destinations separately** (15 min)
+- [x] **1. Represent local and remote watch destinations separately** (15 min)
   RF: RF-01, RF-03, RF-04
   Hecho cuando: Tests distinguish a local path from FTP and SFTP URLs without normalizing a URL as a local filesystem path.
 
-- [ ] **2. Classify both watch arguments before configuration access** (20 min)
+- [x] **2. Classify both watch arguments before configuration access** (20 min)
   RF: RF-01, RF-02, RF-04
   Hecho cuando: Parsing tests reject a remote first argument and invalid argument counts without calling the configuration store.
 
-- [ ] **3. Validate remote scheme, host, and below-root directory** (20 min)
+- [x] **3. Validate remote scheme, host, and below-root directory** (20 min)
   RF: RF-01, RF-04
   Hecho cuando: Tests accept explicit FTP/SFTP subdirectories and reject missing hosts, missing paths, `/`, and unsupported schemes.
 
-- [ ] **4. Reject unsafe or ambiguous remote path encodings** (25 min)
+- [x] **4. Reject unsafe or ambiguous remote path encodings** (25 min)
   RF: RF-04
   Hecho cuando: Tests reject relative paths, dot segments, encoded separators, escapes, and equivalent ambiguous spellings before any connection.
 
-- [ ] **5. Reject URL credentials, queries, and fragments** (15 min)
+- [x] **5. Reject URL credentials, queries, and fragments** (15 min)
   RF: RF-04, RF-05, RF-30
   Hecho cuando: Tests reject userinfo, passwords, queries, and fragments without logging the rejected secret or prompting for access.
 
-- [ ] **6. Preserve local-to-local argument routing** (20 min)
+- [x] **6. Preserve local-to-local argument routing** (20 min)
   RF: RF-01, RF-03
   Hecho cuando: Existing valid local pairs still reach their original path validator and no remote authentication hook is invoked.
 
-- [ ] **7. Reject remote bidirectional mode after configuration loads** (20 min)
+- [x] **7. Reject remote bidirectional mode after configuration loads** (20 min)
   RF: RF-01, RF-02
   Hecho cuando: A configured bidirectional watch with a remote destination errors before credential prompts, connections, or mutations.
 
-- [ ] **8. Route supported remote modes from one startup snapshot** (20 min)
+- [x] **8. Route supported remote modes from one startup snapshot** (20 min)
   RF: RF-01, RF-03, RF-12, RF-29
   Hecho cuando: Policy tests select remote mirror or BACKUP only for their configured modes and retain the startup interval and retention.
 
-- [ ] **9. Apply local source, configuration, and log root guards** (20 min)
+- [x] **9. Apply local source, configuration, and log root guards** (20 min)
   RF: RF-09, RF-12, RF-31
   Hecho cuando: A remote watch rejects an unsafe local source or configuration overlap and retains the existing log-overlap behavior.
 

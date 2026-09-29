@@ -21,16 +21,18 @@ type WatchCommandOptions struct {
 	Logging                      LoggingCoordinatorOptions
 	ConfigurationStore           *ConfigurationStore
 	SynchronizeWithConfiguration func(RootPaths, ConfigurationSnapshot) error
+	SynchronizeRemoteWithPolicy  func(RemoteWatchPolicySnapshot) error
 	Wait                         func(time.Duration)
 }
 
 func runWatchCommand(arguments []string, options WatchCommandOptions) error {
-	roots, err := parseWatchCommand(arguments)
+	request, err := parseWatchCommandRequest(arguments)
 	if err != nil {
 		return err
 	}
 
-	if options.Synchronize != nil {
+	roots, isLocalDestination := request.LocalRoots()
+	if isLocalDestination && options.Synchronize != nil {
 		return runWatchLoop(func() error {
 			return options.Synchronize(roots)
 		}, WatchLoopOptions{Interval: options.Interval, Stop: options.Stop})
@@ -61,7 +63,11 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		defaultConfigurationStore := newConfigurationStore(configurationPath)
 		configurationStore = &defaultConfigurationStore
 	}
-	if err := validateConfigurationPath(configurationStore.Path(), roots); err != nil {
+	localGuardRoots := roots
+	if !isLocalDestination {
+		localGuardRoots = RootPaths{First: request.SourceRoot}
+	}
+	if err := validateConfigurationPath(configurationStore.Path(), localGuardRoots); err != nil {
 		return err
 	}
 	logger := options.Logger
@@ -70,7 +76,7 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		if loggingOptions.ConsoleWriter == nil {
 			loggingOptions.ConsoleWriter = output
 		}
-		logger, err = initializeLoggingCoordinator(roots, loggingOptions)
+		logger, err = initializeLoggingCoordinator(localGuardRoots, loggingOptions)
 		if err != nil {
 			return err
 		}
@@ -95,6 +101,10 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		configuration = configurationResult.Configuration
 	} else {
 		return fmt.Errorf("configuration cannot start watch from status %q", configurationResult.Status)
+	}
+
+	if !isLocalDestination {
+		return runRemoteWatchCommand(request, configuration, options)
 	}
 
 	synchronize := options.SynchronizeWithConfiguration
@@ -147,6 +157,31 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 		return synchronize(roots, configuration)
 	}, WatchLoopOptions{
 		Interval: time.Duration(configuration.SynchronizationIntervalSeconds) * time.Second,
+		Stop:     options.Stop,
+		Wait:     options.Wait,
+	})
+}
+
+func runRemoteWatchCommand(request WatchCommandRequest, configuration ConfigurationSnapshot, options WatchCommandOptions) error {
+	if configuration.SynchronizationMode == SynchronizationModeBidirectional {
+		return fmt.Errorf("remote destinations are not supported in bidirectional mode")
+	}
+	policy, err := buildRemoteWatchPolicySnapshot(request, configuration)
+	if err != nil {
+		return err
+	}
+	canonicalSourceRoot, err := validateRemoteWatchSource(policy.SourceRoot)
+	if err != nil {
+		return err
+	}
+	policy.SourceRoot = canonicalSourceRoot
+	if options.SynchronizeRemoteWithPolicy == nil {
+		return fmt.Errorf("remote destination synchronization is not configured")
+	}
+	return runWatchLoop(func() error {
+		return options.SynchronizeRemoteWithPolicy(policy)
+	}, WatchLoopOptions{
+		Interval: policy.Interval,
 		Stop:     options.Stop,
 		Wait:     options.Wait,
 	})

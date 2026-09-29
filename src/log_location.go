@@ -22,6 +22,9 @@ func logLocationOverlapsRoots(logLocation string, roots RootPaths) (bool, error)
 	}
 
 	for _, synchronizationRoot := range []string{roots.First, roots.Second} {
+		if synchronizationRoot == "" {
+			continue
+		}
 		normalizedSynchronizationRoot, err := normalizeRootPath(synchronizationRoot)
 		if err != nil {
 			return false, fmt.Errorf("normalize synchronization root: %w", err)

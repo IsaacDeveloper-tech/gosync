@@ -111,6 +111,14 @@ func ParseWatchCommand(arguments []string) (RootPaths, error) {
 	return parseWatchCommand(arguments)
 }
 
+func ParseWatchCommandRequest(arguments []string) (WatchCommandRequest, error) {
+	return parseWatchCommandRequest(arguments)
+}
+
+func BuildRemoteWatchPolicySnapshot(request WatchCommandRequest, configuration ConfigurationSnapshot) (RemoteWatchPolicySnapshot, error) {
+	return buildRemoteWatchPolicySnapshot(request, configuration)
+}
+
 func RunWatchLoop(synchronize func() error, options WatchLoopOptions) error {
 	return runWatchLoop(synchronize, options)
 }

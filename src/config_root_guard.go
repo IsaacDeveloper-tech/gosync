@@ -8,6 +8,9 @@ func validateConfigurationPath(configurationPath string, roots RootPaths) error 
 		return fmt.Errorf("normalize configuration path: %w", err)
 	}
 	for _, root := range []string{roots.First, roots.Second} {
+		if root == "" {
+			continue
+		}
 		normalizedRoot, err := normalizeRootPath(root)
 		if err != nil {
 			return fmt.Errorf("normalize synchronization root: %w", err)
