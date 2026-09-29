@@ -132,6 +132,13 @@ func (coordinator *LoggingCoordinator) Log(entry LogEntry) error {
 	return coordinator.Write(formatLogEntry(sanitizedEntry))
 }
 
+func (coordinator *LoggingCoordinator) RegisterProtectedValue(protectedValue string) {
+	if coordinator == nil || coordinator.sanitizer == nil {
+		return
+	}
+	coordinator.sanitizer.RegisterProtectedValue(protectedValue)
+}
+
 func (coordinator *LoggingCoordinator) Write(formattedRecord string) error {
 	if coordinator == nil || (!coordinator.consoleAvailable && !coordinator.persistentAvailable) {
 		return ErrLoggingUnavailable

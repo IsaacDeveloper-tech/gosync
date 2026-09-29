@@ -67,7 +67,7 @@ func TestRemoteWatchRejectsBidirectionalModeBeforeRemoteDispatch(t *testing.T) {
 		StateStore:         &stateStore,
 		ConfigurationStore: &configurationStore,
 		Logging:            LoggingCoordinatorOptions{FileDirectory: filepath.Join(temporaryDirectory, "logs")},
-		SynchronizeRemoteWithPolicy: func(RemoteWatchPolicySnapshot) error {
+		SynchronizeRemoteWithPolicy: func(RemoteWatchExecution) error {
 			remoteDispatchCalls++
 			return nil
 		},
@@ -135,7 +135,7 @@ func TestRemoteWatchRoutesSupportedModesUsingOneStartupPolicySnapshot(t *testing
 			waitIntervals := make([]time.Duration, 0, 1)
 
 			err := runWatchCommand([]string{"watch", sourceRoot, "FTP://Backup.Example:2121/weekly"}, WatchCommandOptions{
-				Input:              strings.NewReader(""),
+				Input:              strings.NewReader("test-user\ntest-password\n"),
 				Output:             ioDiscardWriter{},
 				Stop:               stop,
 				StateStore:         &stateStore,
@@ -147,8 +147,8 @@ func TestRemoteWatchRoutesSupportedModesUsingOneStartupPolicySnapshot(t *testing
 						t.Fatalf("Save(changed configuration) error = %v", err)
 					}
 				},
-				SynchronizeRemoteWithPolicy: func(policy RemoteWatchPolicySnapshot) error {
-					receivedPolicies = append(receivedPolicies, policy)
+				SynchronizeRemoteWithPolicy: func(execution RemoteWatchExecution) error {
+					receivedPolicies = append(receivedPolicies, execution.Policy)
 					if len(receivedPolicies) == 2 {
 						close(stop)
 					}
@@ -197,7 +197,7 @@ func TestRemoteWatchAppliesConfigurationAndSourceGuardsBeforeDispatch(t *testing
 		Output:     ioDiscardWriter{},
 		StateStore: &stateStore,
 		Logging:    LoggingCoordinatorOptions{FileDirectory: filepath.Join(temporaryDirectory, "logs")},
-		SynchronizeRemoteWithPolicy: func(RemoteWatchPolicySnapshot) error {
+		SynchronizeRemoteWithPolicy: func(RemoteWatchExecution) error {
 			remoteDispatchCalls++
 			return nil
 		},
@@ -263,7 +263,8 @@ func TestRemoteWatchKeepsConsoleFallbackWhenLogDirectoryOverlapsSource(t *testin
 			ConsoleWriter: &output,
 			FileDirectory: filepath.Join(sourceRoot, "logs"),
 		},
-		SynchronizeRemoteWithPolicy: func(RemoteWatchPolicySnapshot) error {
+		Input: strings.NewReader("test-user\ntest-password\n"),
+		SynchronizeRemoteWithPolicy: func(RemoteWatchExecution) error {
 			close(stop)
 			return nil
 		},

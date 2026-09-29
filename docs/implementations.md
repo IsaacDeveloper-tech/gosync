@@ -161,3 +161,6 @@ Sequenced CLI and authentication, FTP/SFTP adapters, shared ownership, exact mir
 
 Implemented specification 005's command and endpoint foundation with separate local/remote destinations, strict FTP/SFTP URL validation, and mode-aware startup dispatch.
 Added pre-configuration argument rejection, remote source/config/log guards, immutable startup policy snapshots, and endpoint/routing tests; `go test` and `go test ./...` pass.
+
+Implemented specification 005's Authentication And Remote Contract tasks 10–21 with execution-scoped credentials, SSH known-host trust, and a path-scoped injectable destination contract.
+Added prompt, redaction, trust-order, capability, entry-type, path-boundary, and injected-failure tests; `go test` and `go test ./...` pass.

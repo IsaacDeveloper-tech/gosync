@@ -119,6 +119,46 @@ func BuildRemoteWatchPolicySnapshot(request WatchCommandRequest, configuration C
 	return buildRemoteWatchPolicySnapshot(request, configuration)
 }
 
+func NewRemoteCredentials(username, password string) (RemoteCredentials, error) {
+	return newRemoteCredentials(username, password)
+}
+
+func PromptRemoteCredentials(input io.Reader, output io.Writer) (RemoteCredentials, error) {
+	return promptRemoteCredentials(input, output)
+}
+
+func NewSSHHostTrustStore() (SSHHostTrustStore, error) {
+	return newSSHHostTrustStore()
+}
+
+func NewSSHHostTrustStoreAt(path string) SSHHostTrustStore {
+	return newSSHHostTrustStoreAt(path)
+}
+
+func AuthenticateSFTPSession(endpoint RemoteEndpoint, credentials RemoteCredentials, trustVerifier SSHHostTrustVerifier, session SFTPAuthenticationSession) error {
+	return authenticateSFTPSession(endpoint, credentials, trustVerifier, session)
+}
+
+func NewRemoteRelativePath(value string) (RemoteRelativePath, error) {
+	return newRemoteRelativePath(value)
+}
+
+func RemoteRootPath() RemoteRelativePath {
+	return remoteRootPath()
+}
+
+func NewScopedRemoteDestination(endpoint RemoteEndpoint, operations RemoteProtocolOperations) (*ScopedRemoteDestination, error) {
+	return newScopedRemoteDestination(endpoint, operations)
+}
+
+func RequireRemoteCapabilities(capabilities RemoteCapabilities, mode SynchronizationMode) error {
+	return requireRemoteCapabilities(capabilities, mode)
+}
+
+func CombineRemoteOperationErrors(operationError, cleanupError, closeError error) error {
+	return combineRemoteOperationErrors(operationError, cleanupError, closeError)
+}
+
 func RunWatchLoop(synchronize func() error, options WatchLoopOptions) error {
 	return runWatchLoop(synchronize, options)
 }

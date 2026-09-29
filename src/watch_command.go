@@ -21,7 +21,7 @@ type WatchCommandOptions struct {
 	Logging                      LoggingCoordinatorOptions
 	ConfigurationStore           *ConfigurationStore
 	SynchronizeWithConfiguration func(RootPaths, ConfigurationSnapshot) error
-	SynchronizeRemoteWithPolicy  func(RemoteWatchPolicySnapshot) error
+	SynchronizeRemoteWithPolicy  func(RemoteWatchExecution) error
 	Wait                         func(time.Duration)
 }
 
@@ -104,7 +104,7 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 	}
 
 	if !isLocalDestination {
-		return runRemoteWatchCommand(request, configuration, options)
+		return runRemoteWatchCommand(request, configuration, options, logger, input, output)
 	}
 
 	synchronize := options.SynchronizeWithConfiguration
@@ -162,7 +162,14 @@ func runWatchCommand(arguments []string, options WatchCommandOptions) error {
 	})
 }
 
-func runRemoteWatchCommand(request WatchCommandRequest, configuration ConfigurationSnapshot, options WatchCommandOptions) error {
+func runRemoteWatchCommand(
+	request WatchCommandRequest,
+	configuration ConfigurationSnapshot,
+	options WatchCommandOptions,
+	logger *LoggingCoordinator,
+	input io.Reader,
+	output io.Writer,
+) error {
 	if configuration.SynchronizationMode == SynchronizationModeBidirectional {
 		return fmt.Errorf("remote destinations are not supported in bidirectional mode")
 	}
@@ -178,8 +185,17 @@ func runRemoteWatchCommand(request WatchCommandRequest, configuration Configurat
 	if options.SynchronizeRemoteWithPolicy == nil {
 		return fmt.Errorf("remote destination synchronization is not configured")
 	}
+	credentials, err := promptRemoteCredentials(input, output)
+	if err != nil {
+		return err
+	}
+	if logger != nil {
+		logger.RegisterProtectedValue(credentials.Username())
+		logger.RegisterProtectedValue(credentials.Password())
+	}
+	execution := RemoteWatchExecution{Policy: policy, Credentials: credentials, Logger: logger}
 	return runWatchLoop(func() error {
-		return options.SynchronizeRemoteWithPolicy(policy)
+		return sanitizeRemoteError(options.SynchronizeRemoteWithPolicy(execution), credentials)
 	}, WatchLoopOptions{
 		Interval: policy.Interval,
 		Stop:     options.Stop,

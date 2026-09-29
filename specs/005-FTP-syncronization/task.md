@@ -42,51 +42,51 @@ Tasks are ordered by dependency, are each estimated below 30 minutes, and remain
 
 ## Authentication And Remote Contract
 
-- [ ] **10. Define execution-scoped username/password values** (15 min)
+- [x] **10. Define execution-scoped username/password values** (15 min)
   RF: RF-05, RF-30
   Hecho cuando: Domain tests represent credentials without including either value in destination identity or persistent-state models.
 
-- [ ] **11. Prompt once for remote username and password** (20 min)
+- [x] **11. Prompt once for remote username and password** (20 min)
   RF: RF-05, RF-06
   Hecho cuando: An isolated CLI test obtains both values once for one watch execution and never includes them in the URL.
 
-- [ ] **12. Handle cancelled, absent, and failed credential I/O** (20 min)
+- [x] **12. Handle cancelled, absent, and failed credential I/O** (20 min)
   RF: RF-06, RF-37
   Hecho cuando: EOF, cancellation, input failure, and prompt-output failure each stop before connecting or changing remote data.
 
-- [ ] **13. Sanitize credential-bearing reports and state** (20 min)
+- [x] **13. Sanitize credential-bearing reports and state** (20 min)
   RF: RF-05, RF-06, RF-30
   Hecho cuando: Endpoint displays, credential outcomes, and early logging tests expose no username/password even in server-echoed errors.
 
-- [ ] **14. Resolve established SSH trust by host and port** (25 min)
+- [x] **14. Resolve established SSH trust by host and port** (25 min)
   RF: RF-08
   Hecho cuando: Temporary SSH trust fixtures distinguish a matching identity, an unknown host, a changed key, and another port.
 
-- [ ] **15. Refuse untrusted SFTP before sending credentials** (20 min)
+- [x] **15. Refuse untrusted SFTP before sending credentials** (20 min)
   RF: RF-06, RF-08
   Hecho cuando: A fake connection records no password transmission or remote mutation for unknown, changed, or unavailable trust.
 
-- [ ] **16. Define an injectable remote destination operations contract** (25 min)
+- [x] **16. Define an injectable remote destination operations contract** (25 min)
   RF: RF-10, RF-13, RF-18, RF-26, RF-28
   Hecho cuando: Contract tests exercise typed inspection, read/write, create, delete, publish, and close outcomes through a fake.
 
-- [ ] **17. Enforce the selected remote path boundary** (20 min)
+- [x] **17. Enforce the selected remote path boundary** (20 min)
   RF: RF-04, RF-10, RF-11
   Hecho cuando: Attempts to operate on the server root, redirected ancestors, or paths outside the selected directory fail before mutation.
 
-- [ ] **18. Represent regular, directory, link, special, and unknown entries** (15 min)
+- [x] **18. Represent regular, directory, link, special, and unknown entries** (15 min)
   RF: RF-11, RF-19, RF-28
   Hecho cuando: Inspection results distinguish all five types and never classify unknown entries as empty directories or regular files.
 
-- [ ] **19. Model required server capabilities and refusal outcomes** (20 min)
+- [x] **19. Model required server capabilities and refusal outcomes** (20 min)
   RF: RF-25, RF-28, RF-32
   Hecho cuando: Contract tests distinguish supported capabilities from missing typed listings, safe names, verification, and ownership.
 
-- [ ] **20. Preserve close and cleanup failures separately** (20 min)
+- [x] **20. Preserve close and cleanup failures separately** (20 min)
   RF: RF-26, RF-27, RF-37
   Hecho cuando: Tests return both a primary operation error and a distinct connection-close or cleanup error.
 
-- [ ] **21. Provide a reusable fault-injectable remote contract fixture** (20 min)
+- [x] **21. Provide a reusable fault-injectable remote contract fixture** (20 min)
   RF: RF-26, RF-28, RF-37
   Hecho cuando: Tests can fail each remote operation independently without accessing the network or user data.
 
